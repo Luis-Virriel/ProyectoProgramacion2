@@ -214,6 +214,7 @@
     <Compile Include="Models\Comentario.cs" />
     <Compile Include="Models\Especialidad.cs" />
     <Compile Include="Models\Estado.cs" />
+    <Compile Include="Models\IGestion.cs" />
     <Compile Include="Models\OrdenTrabajo.cs" />
     <Compile Include="Models\Tecnico.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ProyectoProgramacion2.Models
 {
-    public class Tecnico
+    public class Tecnico : IGestion
     {
         private string Nombre;
         private string Apellido;
@@ -58,6 +58,32 @@ namespace ProyectoProgramacion2.Models
         public void setEspecialidad(Especialidad especialidad)
         {
             Especialidad = especialidad;
+        }
+
+
+        public void agregar(List<Tecnico> Tecnicos)
+        {
+
+            //Aca se debe ir , los reads y demas para agregar a un tecnico
+
+            Clientes.Add(new Cliente(3, "Carlos Mendoza", "Calle 789"));
+        }
+
+        public void editar(List<Tecnico> Tecnicos, string ci)
+        {
+
+            //Aca se debe comprobar que la persona se encuentra por el CI
+
+
+        }
+
+        public void eliminar(List<Tecnico> Tecnicos, string ci)
+        {
+
+            //Aca se debe comprobar que la persona se encuentra por el CI
+            //y se debe eliminar de la lista de tecnicos
+
+
         }
 
 
