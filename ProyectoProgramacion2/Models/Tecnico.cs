@@ -61,28 +61,72 @@ namespace ProyectoProgramacion2.Models
         }
 
 
-        public void agregar(List<Tecnico> Tecnicos)
+        public bool verificarCedula(List<Tecnico> Tecnicos, string ci)
         {
+            bool verificacion = false;
+            foreach (Tecnico t in Tecnicos)
+            {
+                if (t.CI == ci)
+                {
+                    verificacion = true;
+                    return verificacion;
+                }
+                
+            }
 
-            //Aca se debe ir , los reads y demas para agregar a un tecnico
+            return verificacion;
 
-            Clientes.Add(new Cliente(3, "Carlos Mendoza", "Calle 789"));
         }
 
-        public void editar(List<Tecnico> Tecnicos, string ci)
+
+        public void agregar(List<Tecnico> Tecnicos ,string nombre , string apellido, string ci, Especialidad especialidad)
         {
 
-            //Aca se debe comprobar que la persona se encuentra por el CI
+            if( verificarCedula(Tecnicos, ci))
+            {
+                // 
+            }
+            else
+            {
+               
+                Tecnicos.Add(new Tecnico(nombre , apellido , ci , especialidad));
+            }
 
+            
+        }
 
+        public void editar(List<Tecnico> Tecnicos, string nombre, string apellido, string ci, Especialidad especialidad)
+        {
+            Tecnico tecnicoExistente = tecnicos.FirstOrDefault(t => t.Ci == ci);
+            if (tecnicoExistente != null)
+            {
+                // Actualiza los atributos del técnico encontrado
+                tecnicoExistente.Nombre = nombre;
+                tecnicoExistente.Apellido = apellido;
+                tecnicoExistente.Especialidad = especialidad;
+            }
+            else
+            {
+                
+                //Error
+                
+            }
         }
 
         public void eliminar(List<Tecnico> Tecnicos, string ci)
         {
 
-            //Aca se debe comprobar que la persona se encuentra por el CI
-            //y se debe eliminar de la lista de tecnicos
+            Tecnico tecnicoExistente = tecnicos.FirstOrDefault(t => t.Ci == ci);
+            if (tecnicoExistente != null)
+            {
+                Tecnicos.Remove(tecnicoExistente);
+            }
+            else
+            {
 
+                //Error
+
+            }
 
         }
 
