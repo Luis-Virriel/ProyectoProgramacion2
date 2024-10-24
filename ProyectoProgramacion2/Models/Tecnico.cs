@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ProyectoProgramacion2.Models
 {
-    public class Tecnico : IGestion
+    public class Tecnico
     {
         private string Nombre;
         private string Apellido;
@@ -61,74 +61,24 @@ namespace ProyectoProgramacion2.Models
         }
 
 
-        public bool verificarCedula(List<Tecnico> Tecnicos, string ci)
-        {
-            bool verificacion = false;
-            foreach (Tecnico t in Tecnicos)
-            {
-                if (t.CI == ci)
-                {
-                    verificacion = true;
-                    return verificacion;
-                }
-                
-            }
-
-            return verificacion;
-
-        }
+        
 
 
-        public void agregar(List<Tecnico> Tecnicos ,string nombre , string apellido, string ci, Especialidad especialidad)
+        public void agregar(string nombre , string apellido, string ci, Especialidad especialidad)
         {
 
-            if( verificarCedula(Tecnicos, ci))
-            {
-                // 
-            }
-            else
-            {
+            
+            
                
-                Tecnicos.Add(new Tecnico(nombre , apellido , ci , especialidad));
-            }
+            BaseDeDatos.Tecnicos.Add(new Tecnico(nombre , apellido , ci , especialidad));
+            
 
             
         }
 
-        public void editar(List<Tecnico> Tecnicos, string nombre, string apellido, string ci, Especialidad especialidad)
-        {
-            Tecnico tecnicoExistente = tecnicos.FirstOrDefault(t => t.Ci == ci);
-            if (tecnicoExistente != null)
-            {
-                // Actualiza los atributos del técnico encontrado
-                tecnicoExistente.Nombre = nombre;
-                tecnicoExistente.Apellido = apellido;
-                tecnicoExistente.Especialidad = especialidad;
-            }
-            else
-            {
-                
-                //Error
-                
-            }
-        }
+        
 
-        public void eliminar(List<Tecnico> Tecnicos, string ci)
-        {
-
-            Tecnico tecnicoExistente = tecnicos.FirstOrDefault(t => t.Ci == ci);
-            if (tecnicoExistente != null)
-            {
-                Tecnicos.Remove(tecnicoExistente);
-            }
-            else
-            {
-
-                //Error
-
-            }
-
-        }
+        
 
 
 

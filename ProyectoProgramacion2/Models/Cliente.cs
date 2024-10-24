@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ProyectoProgramacion2.Models
 {
-    public class Cliente : IGestion
+    public class Cliente
     {
         private string Nombre;
         private string Apellido;
@@ -93,22 +93,7 @@ namespace ProyectoProgramacion2.Models
             Clientes.Add(new Cliente("Nombre", "Apellido", "12345678" , "Direccion" , "esteesmigmail@gmail.com"));
         }
 
-        public void editar(List<Cliente> Clientes , string ci)
-        {
-
-            //Aca se debe comprobar que la persona se encuentra por el CI
-
-            
-        }
-
-        public void eliminar(List<Cliente> Clientes, string ci)
-        {
-
-            //Aca se debe comprobar que la persona se encuentra por el CI
-            //y se debe eliminar de la lista clientes
-
-
-        }
+        
 
 
 
