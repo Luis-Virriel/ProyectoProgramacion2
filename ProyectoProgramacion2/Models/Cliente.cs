@@ -90,7 +90,7 @@ namespace ProyectoProgramacion2.Models
 
             //Aca se debe ir , los reads y demas para agregar a un cliente
 
-            Clientes.Add(new Cliente("Nombre", "Apellido", "12345678" , "Direccion" , "esteesmigmail@gmail.com"));
+            //Clientes.Add(new Cliente("Nombre", "Apellido", "12345678" , "Direccion" , "esteesmigmail@gmail.com"));
         }
 
         
