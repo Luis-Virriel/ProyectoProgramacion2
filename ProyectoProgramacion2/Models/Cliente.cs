@@ -85,12 +85,30 @@ namespace ProyectoProgramacion2.Models
         }
 
 
-        public void agregar(List<Cliente> Clientes)
+        public string agregar(string nombre , string apellido , string cedula , string direccion , string telefono,  string email)
         {
 
-            //Aca se debe ir , los reads y demas para agregar a un cliente
+            
 
-            //Clientes.Add(new Cliente("Nombre", "Apellido", "12345678" , "Direccion" , "esteesmigmail@gmail.com"));
+            string mensaje;
+
+            Cliente nuevoCliente = new Cliente(nombre, apellido, cedula, direccion, telefono, email);
+
+            Cliente clienteEncontrado = BaseDeDatos.Clientes.Find(c => c.CI == cedula);
+
+            if (clienteEncontrado == null)
+            {
+                mensaje = "Su nuevo Cliente se ha agregado correctamente. ";
+                BaseDeDatos.Clientes.Add(nuevoCliente);
+
+            }
+            else
+            {
+                mensaje = "Ya existe un tecnico con la misma Cedula. ";
+            }
+
+            return mensaje;
+
         }
 
         
