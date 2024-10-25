@@ -7,13 +7,13 @@ namespace ProyectoProgramacion2.Models
 {
     public class OrdenTrabajo
     {
-        private int NumeroOrden;
-        private Cliente ClienteAsociado;
-        private Tecnico TecnicoAsignado;
-        private string DescripcionProblema;
-        private DateTime FechaCreacion;
-        private Estado Estado; //Hay un enum creado para estados
-        public List<Comentario> Comentarios;
+        public int NumeroOrden { get; set; }
+        public Cliente ClienteAsociado { get; set; }
+        public Tecnico TecnicoAsignado { get; set; }
+        public string DescripcionProblema { get; set; }
+        public DateTime FechaCreacion { get; set; }
+        public Estado Estado { get; set; } //Hay un enum creado para estados
+        public List<Comentario> Comentarios { get; set; }
 
         public OrdenTrabajo(int numeroOrden, Cliente clienteAsociado, Tecnico tecnicoAsignado, string descripcionProblema, Estado estado)
         {

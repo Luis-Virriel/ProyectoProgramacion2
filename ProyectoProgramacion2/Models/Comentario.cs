@@ -7,9 +7,9 @@ namespace ProyectoProgramacion2.Models
 {
     public class Comentario
     {
-        private string Texto;
-        private DateTime Fecha;
-        private Tecnico Autor;
+        public string Texto { get; set; }
+        public DateTime Fecha { get; set; }
+        public Tecnico Autor { get; set; }
         public Comentario(string texto, DateTime fecha, Tecnico autor)
         {
             Texto = texto;

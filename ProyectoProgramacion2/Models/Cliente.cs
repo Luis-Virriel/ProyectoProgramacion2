@@ -7,14 +7,15 @@ namespace ProyectoProgramacion2.Models
 {
     public class Cliente
     {
-        private string Nombre;
-        private string Apellido;
-        private string CI;
-        private string Direccion;
-        private string Telefono;
-        private string Email;
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string CI { get; set; }
+        public string Direccion { get; set; }
+        public string Telefono { get; set; }
+        public string Email { get; set; }
 
-        public Cliente(string nombre, string apellido, string ci, string direccion, string telefono, string email)
+        /*
+         public Cliente(string nombre, string apellido, string ci, string direccion, string telefono, string email)
         {
             Nombre = nombre;
             Apellido = apellido;
@@ -23,7 +24,7 @@ namespace ProyectoProgramacion2.Models
             Telefono = telefono;
             Email = email;
         }
-
+        */
         public string getNombre()
         {
             return Nombre;
@@ -85,14 +86,14 @@ namespace ProyectoProgramacion2.Models
         }
 
 
-        public string agregar(string nombre , string apellido , string cedula , string direccion , string telefono,  string email)
+        public string agregar(string nombre, string apellido, string cedula, string direccion, string telefono, string email)
         {
 
-            
+
 
             string mensaje;
 
-            Cliente nuevoCliente = new Cliente(nombre, apellido, cedula, direccion, telefono, email);
+            Cliente nuevoCliente = new Cliente(/*nombre, apellido, cedula, direccion, telefono, email*/);
 
             Cliente clienteEncontrado = BaseDeDatos.Clientes.Find(c => c.CI == cedula);
 
@@ -112,11 +113,6 @@ namespace ProyectoProgramacion2.Models
         }
 
         
-
-
-
-
-
 
     }
 }
