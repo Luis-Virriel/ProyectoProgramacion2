@@ -7,18 +7,19 @@ namespace ProyectoProgramacion2.Models
 {
     public class Tecnico
     {
-        private string Nombre;
-        private string Apellido;
-        private string CI;
-        private Especialidad Especialidad;//Hay un enum creado para la especialidad.
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string CI { get; set; }
+        public string Direccion { get; set; }
+        private Especialidad Especialidad { get; set; }//Hay un enum creado para la especialidad.
 
-        public Tecnico(string nombre, string apellido, string ci, Especialidad especialidad)
+        /*public Tecnico(string nombre, string apellido, string ci, Especialidad especialidad)
         {
             Nombre = nombre;
             Apellido = apellido;
             CI = ci;
             Especialidad = especialidad;
-        }
+        }*/
 
         public string getNombre()
         {
@@ -64,7 +65,7 @@ namespace ProyectoProgramacion2.Models
         
 
 
-        public string agregar(string nombre , string apellido, string ci, Especialidad especialidad)
+        /*public string agregar(string nombre , string apellido, string ci, Especialidad especialidad)
         {
             string mensaje;
 
@@ -85,7 +86,7 @@ namespace ProyectoProgramacion2.Models
 
             return mensaje;
 
-        }
+        }*/
 
         
 
