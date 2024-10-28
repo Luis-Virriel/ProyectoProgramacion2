@@ -86,33 +86,33 @@ namespace ProyectoProgramacion2.Models
         }
 
 
-        public string agregar(string nombre, string apellido, string cedula, string direccion, string telefono, string email)
-        {
+        //public string agregar(string nombre, string apellido, string cedula, string direccion, string telefono, string email)
+        // {
 
 
 
-            string mensaje;
+        // string mensaje;
 
-            Cliente nuevoCliente = new Cliente(/*nombre, apellido, cedula, direccion, telefono, email*/);
+        // Cliente nuevoCliente = new Cliente(/*nombre, apellido, cedula, direccion, telefono, email*/);
 
-            Cliente clienteEncontrado = BaseDeDatos.Clientes.Find(c => c.CI == cedula);
+        // Cliente clienteEncontrado = BaseDeDatos.Clientes.Find(c => c.CI == cedula);
 
-            if (clienteEncontrado == null)
-            {
-                mensaje = "Su nuevo Cliente se ha agregado correctamente. ";
-                BaseDeDatos.Clientes.Add(nuevoCliente);
+        // if (clienteEncontrado == null)
+        // {
+        //     mensaje = "Su nuevo Cliente se ha agregado correctamente. ";
+        //     BaseDeDatos.Clientes.Add(nuevoCliente);
 
-            }
-            else
-            {
-                mensaje = "Ya existe un tecnico con la misma Cedula. ";
-            }
+        //   }
+        // else
+        //   {
+        //    mensaje = "Ya existe un tecnico con la misma Cedula. ";
+        // }
 
-            return mensaje;
+        // return mensaje;
+
+        // }
+
+
 
         }
-
-        
-
     }
-}

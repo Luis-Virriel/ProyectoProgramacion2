@@ -1,0 +1,65 @@
+﻿<style >
+.form-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 10px;
+    margin-bottom: 20px;
+    max-width: 600px;
+}
+
+.label {
+    font-weight: bold;
+    align-self: center;
+}
+
+.input-field {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.required-field {
+    color: red;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    grid-column: span 2;
+    justify-self: center;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+.styled-grid {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .styled-grid th, .styled-grid td {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    .styled-grid th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+    }
+
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+</style >
