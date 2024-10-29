@@ -10,8 +10,7 @@ namespace ProyectoProgramacion2.Models
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string CI { get; set; }
-        public string Direccion { get; set; }
-        private Especialidad Especialidad { get; set; }//Hay un enum creado para la especialidad.
+        public Especialidad Especialidad { get; set; }//Hay un enum creado para la especialidad.
 
         /*public Tecnico(string nombre, string apellido, string ci, Especialidad especialidad)
         {

@@ -1,38 +1,93 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Tecnicos.aspx.cs" Inherits="ProyectoProgramacion2.Tecnicos" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div>
+        <h2 class="text-success mb-4" textcolor="Green">Formulario Tecnicos</h2>
+
+        <div>
+            <div class="form-group row">
+                <label for="txtNombre" class="col-sm-3 col-form-label font-weight-bold">Nombre:</label>
+                <div class="col-sm-9">
+                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" placeholder="Ingrese su nombre"></asp:TextBox>
+                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="txtNombre" CssClass="text-danger small" Text="El nombre es requerido."></asp:RequiredFieldValidator>
+                </div>
+            </div>
+
+            <div class="from-group row">
+                <label for="txtApellido" class="col-sm-3 col-form-label font-weight-bold">Apellido:</label>
+                <div class="col-sm-9">
+                    <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" placeholder="Ingrese su apellido"></asp:TextBox>
+                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ControlToValidate="txtApellido" CssClass="text-danger small" Text="El apellido es requerido."></asp:RequiredFieldValidator>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="txtCI" class="col-sm-3 col-form-label font-weight-bold">Cédula de Identidad:</label>
+                <div class="col-sm-9">
+                    <asp:TextBox ID="txtCI" TextMode="Number" runat="server" CssClass="form-control" placeholder="Ingrese su cédula"></asp:TextBox>
+                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="txtCI" CssClass="text-danger small" Text="El número de documento es requerido."></asp:RequiredFieldValidator>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="txtEspecialidad" class="col-sm-3 col-form-label font-weight-bold">Especialidad:</label>
+                <div class="col-sm-9">
+                    <asp:DropDownList runat="server" ID="txtEspecialidad" class="form-select" aria-label="Default select example">
+                        <asp:ListItem runat="server" Selected="True">Seleccione la especialidad </asp:ListItem>
+                        <asp:ListItem runat="server" Value="ReparacionElectrodomesticos">Reparacion de Electrodomesticos</asp:ListItem>
+                        <asp:ListItem runat="server" Value="Informatica">Informatica</asp:ListItem>
+                        <asp:ListItem runat="server" Value="Mecanica">Mecanica</asp:ListItem>
+                        <asp:ListItem runat="server" Value="Electricidad">Electricidad</asp:ListItem>
+                        <asp:ListItem runat="server" Value="Plomeria">Plomeria</asp:ListItem>
+                        <asp:ListItem runat="server" Value="Construccion">Construccion</asp:ListItem>
 
 
-    <br />
+                    </asp:DropDownList>
+                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator5" ControlToValidate="txtEspecialidad" CssClass="text-danger small" Text="La especialidad es requerida."></asp:RequiredFieldValidator>
+                </div>
+            </div>
 
-<asp:Label ID="Label1" runat="server" Text="Nombre :"></asp:Label><asp:TextBox ID="txtNombre" runat="server"></asp:TextBox>
-<asp:Label runat="server" Font-Italic="True">(*)</asp:Label>
-<asp:RequiredFieldValidator runat="server" ID="rfvNombre" ControlToValidate="txtNombre" ForeColor="Red" Text="El nombre es requerido."></asp:RequiredFieldValidator>
-<br />
 
-<asp:Label ID="Label2" runat="server" Text="Apellido :"></asp:Label><asp:TextBox ID="txtApellido" runat="server"></asp:TextBox>
-<asp:Label runat="server" Font-Italic="True">(*)</asp:Label>
-<asp:RequiredFieldValidator runat="server" ID="rfvApellido" ControlToValidate="txtApellido" ForeColor="Red" Text="El apellido es requerido."></asp:RequiredFieldValidator>
-<br />
- <asp:Label ID="Label3" runat="server" Text="Cédula de Identidad :"></asp:Label><asp:TextBox ID="txtCI" TextMode="Number" runat="server"></asp:TextBox>
- <asp:Label runat="server" Font-Italic="True">(*)</asp:Label>
- <asp:RequiredFieldValidator runat="server" ID="rfvCI" ControlToValidate="txtCI" ForeColor="Red" Text="El número de documento es requerido."></asp:RequiredFieldValidator>
- <br />
+            <div class="form-group row">
+                <div class="col-sm-9 offset-sm-3">
+                    <asp:Button ID="Button1" runat="server" Text="Crear Tecnico" CssClass="btn btn-success" OnClick="cmdCrearTecnico_Click" />
+                </div>
+            </div>
 
- <asp:Label ID="Label4" runat="server" Text="Especialidad :"></asp:Label><asp:DropDownList ID ="dEspecialidad" runat="server">
-     <asp:ListItem>Refrigeracion</asp:ListItem>
-     <asp:ListItem>Plomero</asp:ListItem>
- </asp:DropDownList>
-    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="<dEspecialidad" ForeColor="Red" Text="La especialidad es requerida."></asp:RequiredFieldValidator>
- <br />
 
-    <br />
-<br />
 
-<asp:DropDownList ID="cboTecnicos" runat="server"></asp:DropDownList>
-<asp:Button ID="cmdVer" runat="server" Text="Crear Tecnico" OnClick="cmdVer_Click" />
-    <br />
-    <br />
-<asp:GridView runat="server" ID="gvTecnicos" Width="90%" BorderWidth="1" BorderColor="Blue"></asp:GridView>
-    <asp:Label ID="lblError" runat="server" Visible="false" ForeColor="Red"></asp:Label>
-<br />
+
+        </div>
+
+        <h3 class="text-primary">Lista de Tecnicos</h3>
+        <asp:GridView ID="gvTecnicos" runat="server" CssClass="table table-bordered table-striped" AutoGenerateColumns="False" DataKeyNames="Nombre"
+            AutoGenerateEditButton="True" AutoGenerateDeleteButton="True"
+            OnRowEditing="gvTecnicos_RowEditing" OnRowUpdating="gvTecnicos_RowUpdating"
+            OnRowDeleting="gvTecnicos_RowDeleting" OnRowCancelingEdit="gvTecnicos_RowCancelingEdit">
+            <Columns>
+                <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+                <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
+                <asp:BoundField DataField="CI" HeaderText="Cédula de Identidad" />
+                <asp:BoundField DataField="Especialidad" HeaderText="Especialidad" />
+
+            </Columns>
+        </asp:GridView>
+        <asp:Label ID="lblError" runat="server" Visible="false" CssClass="text-danger"></asp:Label>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </asp:Content>
