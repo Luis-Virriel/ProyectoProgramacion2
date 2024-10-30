@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using System.Web.Services.Description;
+
 namespace ProyectoProgramacion2
 {
     public partial class Tecnicos : System.Web.UI.Page
@@ -102,10 +104,10 @@ namespace ProyectoProgramacion2
         }
         private void LimpiarCampos()
         {
-            txtNombre.Text = string.Empty;
-            txtApellido.Text = string.Empty;
-            txtCI.Text = string.Empty;
-            txtEspecialidad.Text = string.Empty;
+            txtNombre.Text = "";
+            txtApellido.Text = "";
+            txtCI.Text = "";
+            txtEspecialidad.Text = "";
             
         }
 
@@ -115,40 +117,52 @@ namespace ProyectoProgramacion2
             lblError.Text = "Tecnico actualizado correctamente.";
             lblError.Visible = true;
         }
-        protected void gvClientes_RowEditing(object sender, GridViewEditEventArgs e)
+        protected void EditarTecnicos(object sender, GridViewEditEventArgs e)
         {
             gvTecnicos.EditIndex = e.NewEditIndex;
-            gvTecnicos.DataSource = BaseDeDatos.Tecnicos;
-            gvTecnicos.DataBind();
+            CargarTecnicos();
         }
 
-        protected void gvTecnicos_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+
+        protected void CanceloEditarTecnicos(object sender, GridViewCancelEditEventArgs e)
         {
             gvTecnicos.EditIndex = -1;
             gvTecnicos.DataSource = BaseDeDatos.Tecnicos;
             gvTecnicos.DataBind();
         }
 
-        protected void gvTecnicos_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        protected void ActualizarTecnicos(object sender, GridViewUpdateEventArgs e)
         {
             int index = e.RowIndex;
 
             if (index >= 0 && index < BaseDeDatos.Tecnicos.Count)
             {
+                GridViewRow row = gvTecnicos.Rows[index];
                 Tecnico tecnico = BaseDeDatos.Tecnicos[index];
 
-
-                tecnico.Nombre = ((TextBox)gvTecnicos.Rows[index].Cells[1].Controls[0]).Text;
-                tecnico.Apellido = ((TextBox)gvTecnicos.Rows[index].Cells[2].Controls[0]).Text;
-                tecnico.CI = ((TextBox)gvTecnicos.Rows[index].Cells[3].Controls[0]).Text;
-                tecnico.Especialidad = convertirAespecialidad(((DropDownList)gvTecnicos.Rows[index].Cells[4].Controls[0]).Text);
-
+                tecnico.Nombre = ((TextBox)row.Cells[1].Controls[0]).Text;
+                tecnico.Apellido = ((TextBox)row.Cells[2].Controls[0]).Text;
+                tecnico.CI = ((TextBox)row.Cells[3].Controls[0]).Text;
+                DropDownList ddlEspecialidad = (DropDownList)row.Cells[4].FindControl("txtEspecialidad");
+                if (ddlEspecialidad != null)
+                {
+                    tecnico.Especialidad = convertirAespecialidad(ddlEspecialidad.SelectedValue);
+                }
 
                 gvTecnicos.EditIndex = -1;
                 CargarTecnicos();
             }
         }
+        protected void BorrarTecnicos(object sender, GridViewDeleteEventArgs e)
+        {
+            int index = e.RowIndex;
+            if (index >= 0 && index < BaseDeDatos.Tecnicos.Count)
+            {
+                BaseDeDatos.Tecnicos.RemoveAt(index);
+                CargarTecnicos();
+            }
+        }
 
-       
+
     }
 }
