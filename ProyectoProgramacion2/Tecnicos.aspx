@@ -1,37 +1,40 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Tecnicos.aspx.cs" Inherits="ProyectoProgramacion2.Tecnicos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div>
-        <h2 class="text-success mb-4" textcolor="Green">Formulario Tecnicos</h2>
+    <div class="container mt-4">
+        <h2 class="text-success mb-4" textcolor="Green">Formulario Técnicos</h2>
 
         <div>
             <div class="form-group row">
                 <label for="txtNombre" class="col-sm-3 col-form-label font-weight-bold">Nombre:</label>
-                <div class="col-sm-9">
+                <div class="col-sm-9 d-flex align-items-center">
                     <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" placeholder="Ingrese su nombre"></asp:TextBox>
+                    <span class="fst-italic">(*)</span>
                     <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="txtNombre" CssClass="text-danger small" Text="El nombre es requerido."></asp:RequiredFieldValidator>
                 </div>
             </div>
 
-            <div class="from-group row">
+            <div class="form-group row">
                 <label for="txtApellido" class="col-sm-3 col-form-label font-weight-bold">Apellido:</label>
-                <div class="col-sm-9">
+                <div class="col-sm-9 d-flex align-items-center">
                     <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" placeholder="Ingrese su apellido"></asp:TextBox>
+                    <span class="fst-italic">(*)</span>
                     <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ControlToValidate="txtApellido" CssClass="text-danger small" Text="El apellido es requerido."></asp:RequiredFieldValidator>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="txtCI" class="col-sm-3 col-form-label font-weight-bold">Cédula de Identidad:</label>
-                <div class="col-sm-9">
+                <div class="col-sm-9 d-flex align-items-center">
                     <asp:TextBox ID="txtCI" TextMode="Number" runat="server" CssClass="form-control" placeholder="Ingrese su cédula"></asp:TextBox>
+                    <span class="fst-italic">(*)</span>
                     <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="txtCI" CssClass="text-danger small" Text="El número de documento es requerido."></asp:RequiredFieldValidator>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="txtEspecialidad" class="col-sm-3 col-form-label font-weight-bold">Especialidad:</label>
-                <div class="col-sm-9">
+                <div class="col-sm-9 d-flex align-items-center">
                     <asp:DropDownList runat="server" ID="txtEspecialidad" class="form-select" aria-label="Default select example">
                         <asp:ListItem runat="server" Selected="True">Seleccione la especialidad </asp:ListItem>
                         <asp:ListItem runat="server" Value="ReparacionElectrodomesticos">Reparacion de Electrodomesticos</asp:ListItem>
@@ -46,8 +49,7 @@
                     <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator5" ControlToValidate="txtEspecialidad" CssClass="text-danger small" Text="La especialidad es requerida."></asp:RequiredFieldValidator>
                 </div>
             </div>
-
-
+            <br />
             <div class="form-group row">
                 <div class="col-sm-9 offset-sm-3">
                     <asp:Button ID="Button1" runat="server" Text="Crear Tecnico" CssClass="btn btn-success" OnClick="cmdCrearTecnico_Click" />

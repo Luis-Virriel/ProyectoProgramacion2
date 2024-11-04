@@ -55,7 +55,7 @@
                     <asp:RegularExpressionValidator ID="revEmail" runat="server" ControlToValidate="txtEmail" ErrorMessage="Ingresa un correo válido" ValidationExpression="^[^@\s]+@[^@\s]+\.[^@\s]+$" CssClass="text-danger small"></asp:RegularExpressionValidator>
                 </div>
             </div>
-
+            <br />
             <div class="form-group row">
                 <div class="col-sm-9 offset-sm-3">
                     <asp:Button ID="cmdVer" runat="server" Text="Crear Cliente" CssClass="btn btn-primary" OnClick="cmdVer_Click" />
