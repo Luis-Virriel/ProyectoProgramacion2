@@ -10,7 +10,7 @@
                 <div class="col-sm-9 d-flex align-items-center">
                     <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" placeholder="Ingrese su nombre"></asp:TextBox>
                     <span class="fst-italic">(*)</span>
-                    <asp:RequiredFieldValidator runat="server" ID="rfvNombre" ControlToValidate="txtNombre" CssClass="text-danger small" Text="El nombre es requerido."></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator runat="server" ID="rfvNombre" ValidationGroup="formRequerido" ControlToValidate="txtNombre" CssClass="text-danger small" Text="El nombre es requerido."></asp:RequiredFieldValidator>
                 </div>
             </div>
 
@@ -19,7 +19,7 @@
                 <div class="col-sm-9 d-flex align-items-center">
                     <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" placeholder="Ingrese su apellido"></asp:TextBox>
                     <span class="fst-italic">(*)</span>
-                    <asp:RequiredFieldValidator runat="server" ID="rfvApellido" ControlToValidate="txtApellido" CssClass="text-danger small" Text="El apellido es requerido."></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator runat="server" ID="rfvApellido" ValidationGroup="formRequerido" ControlToValidate="txtApellido" CssClass="text-danger small" Text="El apellido es requerido."></asp:RequiredFieldValidator>
                 </div>
             </div>
 
@@ -28,14 +28,14 @@
                 <div class="col-sm-9 d-flex align-items-center">
                     <asp:TextBox ID="txtCI" TextMode="Number" runat="server" CssClass="form-control" placeholder="Ingrese su cédula"></asp:TextBox>
                     <span class="fst-italic">(*)</span>
-                    <asp:RequiredFieldValidator runat="server" ID="rfvCI" ControlToValidate="txtCI" CssClass="text-danger small" Text="El número de documento es requerido."></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator runat="server" ID="rfvCI" ValidationGroup="formRequerido" ControlToValidate="txtCI" CssClass="text-danger small" Text="El número de documento es requerido."></asp:RequiredFieldValidator>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="txtDireccion" class="col-sm-3 col-form-label font-weight-bold">Dirección:</label>
                 <div class="col-sm-9 d-flex align-items-center">
-                    <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control" placeholder="Ingrese su dirección"></asp:TextBox>
+                    <asp:TextBox ID="txtDireccion" runat="server" ValidationGroup="formRequerido" CssClass="form-control" placeholder="Ingrese su dirección"></asp:TextBox>
                     <br />
                 </div>
             </div>
@@ -52,13 +52,13 @@
                 <label for="txtEmail" class="col-sm-3 col-form-label font-weight-bold">Correo electrónico:</label>
                 <div class="col-sm-9 d-flex align-items-center">
                     <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="Ingrese su correo electrónico"></asp:TextBox>
-                    <asp:RegularExpressionValidator ID="revEmail" runat="server" ControlToValidate="txtEmail" ErrorMessage="Ingresa un correo válido" ValidationExpression="^[^@\s]+@[^@\s]+\.[^@\s]+$" CssClass="text-danger small"></asp:RegularExpressionValidator>
+                    <asp:RegularExpressionValidator ID="revEmail" runat="server" ValidationGroup="formRequerido" ControlToValidate="txtEmail" ErrorMessage="Ingresa un correo válido" ValidationExpression="^[^@\s]+@[^@\s]+\.[^@\s]+$" CssClass="text-danger small"></asp:RegularExpressionValidator>
                 </div>
             </div>
             <br />
             <div class="form-group row">
                 <div class="col-sm-9 offset-sm-3">
-                    <asp:Button ID="cmdVer" runat="server" Text="Crear Cliente" CssClass="btn btn-primary" OnClick="cmdVer_Click" />
+                    <asp:Button ID="cmdVer" runat="server" Text="Crear Cliente" CausesValidation="true" ValidationGroup="formRequerido" CssClass="btn btn-primary" OnClick="cmdVer_Click" />
                 </div>
             </div>
         </div>

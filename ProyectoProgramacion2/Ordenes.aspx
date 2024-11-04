@@ -24,13 +24,13 @@
                 <div class="col-sm-9">
                     <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" TextMode="MultiLine" placeholder="Ingrese la descripción del problema"></asp:TextBox>
                     <span class="fst-italic">(*)</span>
-                    <asp:RequiredFieldValidator runat="server" ID="rfvDescripcion" ControlToValidate="txtDescripcion" CssClass="text-danger small" Text="La descripción es requerida."></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator runat="server" ID="rfvDescripcion" ValidationGroup="formRequerido" ControlToValidate="txtDescripcion" CssClass="text-danger small" Text="La descripción es requerida."></asp:RequiredFieldValidator>
                 </div>
             </div>
 
             <div class="form-group row">
                 <div class="col-sm-9 offset-sm-3">
-                    <asp:Button ID="btnCrearOrden" runat="server" Text="Crear Orden" CssClass="btn btn-danger" OnClick="btnCrearOrden_Click" />
+                    <asp:Button ID="btnCrearOrden" runat="server" Text="Crear Orden" CausesValidation="true" ValidationGroup="formRequerido" CssClass="btn btn-danger" OnClick="btnCrearOrden_Click" />
                 </div>
             </div>
         </div>

@@ -10,7 +10,7 @@
                 <div class="col-sm-9 d-flex align-items-center">
                     <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" placeholder="Ingrese su nombre"></asp:TextBox>
                     <span class="fst-italic">(*)</span>
-                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="txtNombre" CssClass="text-danger small" Text="El nombre es requerido."></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ValidationGroup="formRequerido" ControlToValidate="txtNombre" CssClass="text-danger small" Text="El nombre es requerido."></asp:RequiredFieldValidator>
                 </div>
             </div>
 
@@ -19,7 +19,7 @@
                 <div class="col-sm-9 d-flex align-items-center">
                     <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" placeholder="Ingrese su apellido"></asp:TextBox>
                     <span class="fst-italic">(*)</span>
-                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ControlToValidate="txtApellido" CssClass="text-danger small" Text="El apellido es requerido."></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ValidationGroup="formRequerido" ControlToValidate="txtApellido" CssClass="text-danger small" Text="El apellido es requerido."></asp:RequiredFieldValidator>
                 </div>
             </div>
 
@@ -28,7 +28,7 @@
                 <div class="col-sm-9 d-flex align-items-center">
                     <asp:TextBox ID="txtCI" TextMode="Number" runat="server" CssClass="form-control" placeholder="Ingrese su cédula"></asp:TextBox>
                     <span class="fst-italic">(*)</span>
-                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="txtCI" CssClass="text-danger small" Text="El número de documento es requerido."></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ValidationGroup="formRequerido" ControlToValidate="txtCI" CssClass="text-danger small" Text="El número de documento es requerido."></asp:RequiredFieldValidator>
                 </div>
             </div>
 
@@ -46,13 +46,13 @@
 
 
                     </asp:DropDownList>
-                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator5" ControlToValidate="txtEspecialidad" CssClass="text-danger small" Text="La especialidad es requerida."></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator5" ValidationGroup="formRequerido" ControlToValidate="txtEspecialidad" CssClass="text-danger small" Text="La especialidad es requerida."></asp:RequiredFieldValidator>
                 </div>
             </div>
             <br />
             <div class="form-group row">
                 <div class="col-sm-9 offset-sm-3">
-                    <asp:Button ID="Button1" runat="server" Text="Crear Tecnico" CssClass="btn btn-success" OnClick="cmdCrearTecnico_Click" />
+                    <asp:Button ID="Button1" runat="server" Text="Crear Tecnico" CausesValidation="true" ValidationGroup="formRequerido" CssClass="btn btn-success" OnClick="cmdCrearTecnico_Click" />
                 </div>
             </div>
 
