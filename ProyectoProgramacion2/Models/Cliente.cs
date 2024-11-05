@@ -84,7 +84,10 @@ namespace ProyectoProgramacion2.Models
         {
             Email = email;
         }
-
+        public string NombreCompleto()
+        {
+            return $"{Nombre} {Apellido}";
+        }
 
         //public string agregar(string nombre, string apellido, string cedula, string direccion, string telefono, string email)
         // {
@@ -114,5 +117,5 @@ namespace ProyectoProgramacion2.Models
 
 
 
-        }
+    }
     }

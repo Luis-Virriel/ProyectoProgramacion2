@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ProyectoProgramacion2.Models; 
+using ProyectoProgramacion2.Models;
 
 namespace ProyectoProgramacion2
 {
@@ -15,55 +15,67 @@ namespace ProyectoProgramacion2
         {
             if (!IsPostBack)
             {
-
+                CargarClientes();
+                CargarTecnicos();
                 CargarDatos();
             }
         }
 
+        private void CargarClientes()
+        {
+            ddlCliente.DataSource = BaseDeDatos.Clientes;
+            ddlCliente.DataTextField = "Nombre";
+            ddlCliente.DataValueField = "CI";
+            ddlCliente.DataBind();
+            ddlCliente.Items.Insert(0, new ListItem("Seleccione un cliente", ""));
+        }
+
+        private void CargarTecnicos()
+        {
+            ddlTecnico.DataSource = BaseDeDatos.Tecnicos;
+            ddlTecnico.DataTextField = "Nombre";
+            ddlTecnico.DataValueField = "CI";
+            ddlTecnico.DataBind();
+            ddlTecnico.Items.Insert(0, new ListItem("Seleccione un técnico", ""));
+        }
+
         private void CargarDatos()
         {
-            /*var clientes = new List<Cliente>
-            {
-                new Cliente { Nombre = "Romina" },
-                new Cliente { Nombre = "Pepe" },
-                new Cliente { Nombre = "Alberto" }
-            };
-            var tecnicos = new List<Tecnico>
-            {
-                new Tecnico { Nombre = "Luis" },
-                new Tecnico { Nombre = "Danlee" },
-                new Tecnico { Nombre = "Carlitos" }
-            };
-            OrdenesTrabajo = new List<OrdenTrabajo>
-            {
-                new OrdenTrabajo(1, clientes[0], tecnicos[0], "Problema con licuadora", Estado.Pendiente),
-                new OrdenTrabajo(2, clientes[1], tecnicos[1], "Problema con pc", Estado.EnProgreso),
-                new OrdenTrabajo(3, clientes[2], tecnicos[2], "Problema con la vida", Estado.Completada)
-            };*/
-            gvOrdenes.DataSource = OrdenesTrabajo;
+            gvOrdenes.DataSource = BaseDeDatos.OrdenesDeTrabajo;
             gvOrdenes.DataBind();
         }
 
         protected void btnCrearOrden_Click(object sender, EventArgs e)
         {
+            lblError.Visible = false;
+
             if (string.IsNullOrEmpty(txtDescripcion.Text))
             {
                 lblError.Text = "La descripción es requerida.";
                 lblError.Visible = true;
                 return;
             }
+
             int nuevoNumeroOrden = OrdenesTrabajo.Count > 0 ? OrdenesTrabajo.Max(o => o.NumeroOrden) + 1 : 1;
+
+            if (ddlCliente.SelectedIndex == 0 || ddlTecnico.SelectedIndex == 0)
+            {
+                lblError.Text = "Debe seleccionar un cliente y un técnico.";
+                lblError.Visible = true;
+                return;
+            }
 
             Cliente clienteSeleccionado = new Cliente { Nombre = ddlCliente.SelectedItem.Text };
             Tecnico tecnicoSeleccionado = new Tecnico { Nombre = ddlTecnico.SelectedItem.Text };
 
             OrdenTrabajo nuevaOrden = new OrdenTrabajo(nuevoNumeroOrden, clienteSeleccionado, tecnicoSeleccionado, txtDescripcion.Text, Estado.Pendiente);
-
             OrdenesTrabajo.Add(nuevaOrden);
+            BaseDeDatos.OrdenesDeTrabajo.Add(nuevaOrden);
+
             txtDescripcion.Text = "";
-            lblError.Visible = false;
             CargarDatos();
         }
+
 
         protected void gvOrdenes_RowEditing(object sender, GridViewEditEventArgs e)
         {
@@ -75,13 +87,25 @@ namespace ProyectoProgramacion2
         {
             int numeroOrden = (int)gvOrdenes.DataKeys[e.RowIndex].Value;
 
-
             var orden = OrdenesTrabajo.FirstOrDefault(o => o.NumeroOrden == numeroOrden);
             if (orden != null)
             {
-                orden.setClienteAsociado(new Cliente { Nombre = ddlCliente.SelectedItem.Text }); 
-                orden.setTecnicoAsignado(new Tecnico { Nombre = ddlTecnico.SelectedItem.Text });
-                orden.setDescripcionProblema(((TextBox)gvOrdenes.Rows[e.RowIndex].FindControl("txtDescripcion")).Text);
+                var ddlEstado = (DropDownList)gvOrdenes.Rows[e.RowIndex].FindControl("ddlEstado");
+                if (ddlEstado != null)
+                {
+                    if (Enum.TryParse(ddlEstado.SelectedValue, out Estado nuevoEstado))
+                    {
+                        orden.Estado = nuevoEstado;
+
+                    }
+                    else
+                    {
+                        lblError.Text = "El estado seleccionado no es válido.";
+                        lblError.Visible = true;
+                        return;
+                    }
+                }
+
                 gvOrdenes.EditIndex = -1;
                 CargarDatos();
             }
@@ -91,6 +115,34 @@ namespace ProyectoProgramacion2
         {
             gvOrdenes.EditIndex = -1;
             CargarDatos();
+        }
+
+        protected void gvOrdenes_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                var ddlEstado = (DropDownList)e.Row.FindControl("ddlEstado");
+                if (ddlEstado != null)
+                {
+                    ddlEstado.DataSource = Enum.GetValues(typeof(Estado))
+                        .Cast<Estado>()
+                        .Select(estados => new
+                        {
+                            Value = estados.ToString(),
+                            Text = estados.ToString()
+                        })
+                        .ToList();
+
+                    ddlEstado.DataTextField = "Text";
+                    ddlEstado.DataValueField = "Value";
+                    ddlEstado.DataBind();
+                    var orden = e.Row.DataItem as OrdenTrabajo;
+                    if (orden != null)
+                    {
+                        ddlEstado.SelectedValue = orden.Estado.ToString();
+                    }
+                }
+            }
         }
     }
 }

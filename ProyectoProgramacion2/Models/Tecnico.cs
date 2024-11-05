@@ -59,39 +59,14 @@ namespace ProyectoProgramacion2.Models
         {
             Especialidad = especialidad;
         }
-
-
-        
-
-
-        /*public string agregar(string nombre , string apellido, string ci, Especialidad especialidad)
+        public string NombreCompleto()
         {
-            string mensaje;
-
-            Tecnico nuevoTecnico = new Tecnico(nombre, apellido, ci, especialidad);
-
-            Tecnico tecnicoEncontrado = BaseDeDatos.Tecnicos.Find(t => t.CI == ci);
-
-            if (tecnicoEncontrado == null)
-            {
-                mensaje = "Su nuevo tecnico se ha agregado correctamente. ";
-                BaseDeDatos.Tecnicos.Add(nuevoTecnico);
-                         
-            }
-            else
-            {
-                mensaje = "Ya existe un tecnico con la misma Cedula. ";
-            }
-
-            return mensaje;
-
-        }*/
-
-        
-
-        
+            return $"{Nombre} {Apellido}";
+        }
 
 
 
+
+       
     }
 }
