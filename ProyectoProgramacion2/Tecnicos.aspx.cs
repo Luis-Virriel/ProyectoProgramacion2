@@ -97,8 +97,6 @@ namespace ProyectoProgramacion2
 
             gvTecnicos.DataSource = BaseDeDatos.Tecnicos;
             gvTecnicos.DataBind();
-
-            lblError.Text = "Tecnico creado correctamente";
             lblError.Visible = true;
             LimpiarCampos();
         }
@@ -142,17 +140,25 @@ namespace ProyectoProgramacion2
 
                 tecnico.Nombre = ((TextBox)row.Cells[1].Controls[0]).Text;
                 tecnico.Apellido = ((TextBox)row.Cells[2].Controls[0]).Text;
-                tecnico.CI = ((TextBox)row.Cells[3].Controls[0]).Text;
-                DropDownList ddlEspecialidad = (DropDownList)row.Cells[4].FindControl("txtEspecialidad");
-                if (ddlEspecialidad != null)
+                tecnico.CI = ((TextBox)row.Cells[0].Controls[0]).Text;
+
+                DropDownList ddlEspecialidad = (DropDownList)row.FindControl("ddlEspecialidad");
+                if (ddlEspecialidad != null && Enum.TryParse(ddlEspecialidad.SelectedValue, out Especialidad especialidad))
                 {
-                    tecnico.Especialidad = convertirAespecialidad(ddlEspecialidad.SelectedValue);
+                    tecnico.Especialidad = especialidad;
+                }
+                else
+                {
+                    lblError.Text = "Especialidad seleccionada no válida.";
+                    lblError.Visible = true;
+                    return;
                 }
 
                 gvTecnicos.EditIndex = -1;
                 CargarTecnicos();
             }
         }
+
         protected void BorrarTecnicos(object sender, GridViewDeleteEventArgs e)
         {
             int index = e.RowIndex;

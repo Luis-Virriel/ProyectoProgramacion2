@@ -12,7 +12,7 @@
         <pages enableEventValidation="true" />
     </system.web>
 </configuration>
-    <title><%: Page.Title %> - Mi aplicación ASP.NET</title>
+    <title><%: Page.Title %> - Gestor de ordenes de trabajo.</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -45,16 +45,20 @@
 
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" runat="server" href="~/">Gestor de Órdenes</a>
+                <!--
+                <a class="navbar-brand" runat="server" href="~/">Gestor de Órdenes</a>-->
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar navegación" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                aria-expanded="false" aria-label="Toggle navigation">
+                 <span class="navbar-toggler-icon"></span>
                 </button>
+                  
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Default">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Tecnicos">Tecnicos</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Clientes">Clientes</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Ordenes">Ordenes</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Buscar">Buscar</a></li>
                     </ul>
                 </div>
             </div>

@@ -71,7 +71,7 @@ namespace ProyectoProgramacion2
             OrdenTrabajo nuevaOrden = new OrdenTrabajo(nuevoNumeroOrden, clienteSeleccionado, tecnicoSeleccionado, txtDescripcion.Text, Estado.Pendiente);
             OrdenesTrabajo.Add(nuevaOrden);
             BaseDeDatos.OrdenesDeTrabajo.Add(nuevaOrden);
-
+            
             txtDescripcion.Text = "";
             CargarDatos();
         }
@@ -85,6 +85,8 @@ namespace ProyectoProgramacion2
 
         protected void gvOrdenes_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
+            lblError.Visible = false;
+
             int numeroOrden = (int)gvOrdenes.DataKeys[e.RowIndex].Value;
 
             var orden = OrdenesTrabajo.FirstOrDefault(o => o.NumeroOrden == numeroOrden);
@@ -93,10 +95,9 @@ namespace ProyectoProgramacion2
                 var ddlEstado = (DropDownList)gvOrdenes.Rows[e.RowIndex].FindControl("ddlEstado");
                 if (ddlEstado != null)
                 {
-                    if (Enum.TryParse(ddlEstado.SelectedValue, out Estado nuevoEstado))
+                    if (Enum.TryParse<Estado>(ddlEstado.SelectedValue, out var nuevoEstado))
                     {
                         orden.Estado = nuevoEstado;
-
                     }
                     else
                     {
@@ -106,10 +107,12 @@ namespace ProyectoProgramacion2
                     }
                 }
 
+
                 gvOrdenes.EditIndex = -1;
                 CargarDatos();
             }
         }
+
 
         protected void gvOrdenes_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
@@ -136,6 +139,7 @@ namespace ProyectoProgramacion2
                     ddlEstado.DataTextField = "Text";
                     ddlEstado.DataValueField = "Value";
                     ddlEstado.DataBind();
+
                     var orden = e.Row.DataItem as OrdenTrabajo;
                     if (orden != null)
                     {
@@ -144,5 +148,6 @@ namespace ProyectoProgramacion2
                 }
             }
         }
+
     }
 }

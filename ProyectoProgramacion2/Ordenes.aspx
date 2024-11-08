@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container mt-4">
-        <h2 class="text-danger mb-4">Gestión de Órdenes de Trabajo</h2>
+        <h2 class="text-danger mb-4">Gestión de Ordenes de Trabajo</h2>
 
         <div>
             <div class="form-group row">
@@ -27,12 +27,13 @@
                     <asp:RequiredFieldValidator runat="server" ID="rfvDescripcion" ValidationGroup="formRequerido" ControlToValidate="txtDescripcion" CssClass="text-danger small" Text="La descripción es requerida."></asp:RequiredFieldValidator>
                 </div>
             </div>
-
+            <br />
             <div class="form-group row">
                 <div class="col-sm-9 offset-sm-3">
                     <asp:Button ID="btnCrearOrden" runat="server" Text="Crear Orden" CausesValidation="true" ValidationGroup="formRequerido" CssClass="btn btn-danger" OnClick="btnCrearOrden_Click" />
                 </div>
             </div>
+            <asp:Label ID="Label1" runat="server" Visible="false" CssClass="text-danger"></asp:Label>
         </div>
 
         <br />
@@ -53,9 +54,8 @@
                     <EditItemTemplate>
                         <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-control" SelectedValue='<%# Eval("Estado") %>'>
                             <asp:ListItem Text="Pendiente" Value="Pendiente"></asp:ListItem>
-                            <asp:ListItem Text="EnProceso" Value="EnProceso"></asp:ListItem>
-                            <asp:ListItem Text="Completado" Value="Completado"></asp:ListItem>
-                            <asp:ListItem Text="Cancelado" Value="Cancelado"></asp:ListItem>
+                            <asp:ListItem Text="EnProgreso" Value="EnProgreso"></asp:ListItem>
+                            <asp:ListItem Text="Completada" Value="Completada"></asp:ListItem>
                         </asp:DropDownList>
                     </EditItemTemplate>
                 </asp:TemplateField>

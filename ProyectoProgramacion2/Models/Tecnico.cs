@@ -12,7 +12,7 @@ namespace ProyectoProgramacion2.Models
         public string CI { get; set; }
         public Especialidad Especialidad { get; set; }
 
-        /*public Tecnico(string nombre, string apellido, string ci, Especialidad especialidad)
+       /* public Tecnico(string nombre, string apellido, string ci, Especialidad especialidad)
         {
             Nombre = nombre;
             Apellido = apellido;

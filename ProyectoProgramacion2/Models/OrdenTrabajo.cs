@@ -12,7 +12,7 @@ namespace ProyectoProgramacion2.Models
         public Tecnico TecnicoAsignado { get; set; }
         public string DescripcionProblema { get; set; }
         public DateTime FechaCreacion { get; set; }
-        public Estado Estado { get; set; } //Hay un enum creado para estados
+        public Estado Estado { get; set; }
         public List<Comentario> Comentarios { get; set; }
 
         public OrdenTrabajo(int numeroOrden, Cliente clienteAsociado, Tecnico tecnicoAsignado, string descripcionProblema, Estado estado)
@@ -25,6 +25,7 @@ namespace ProyectoProgramacion2.Models
             Estado = estado;
             Comentarios = new List<Comentario>();
         }
+        public static List<OrdenTrabajo> OrdenesDeTrabajo = new List<OrdenTrabajo>();
         public int getNumeroOrden()
         {
             return NumeroOrden;
