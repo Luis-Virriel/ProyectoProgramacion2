@@ -63,6 +63,8 @@
                     <ItemTemplate>
                         <asp:Label ID="lblComentarios" runat="server"
                             Text='<%# string.Join(", ", (Eval("Comentarios") as List<ProyectoProgramacion2.Models.Comentario>).Select(c => c.Texto)) %>'></asp:Label>
+                        <asp:Button ID="btnAgregarComentario" runat="server" Text="Agregar Comentario"
+                            CommandName="AgregarComentario" CommandArgument='<%# Eval("NumeroOrden") %>' />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:CommandField ShowEditButton="True" />

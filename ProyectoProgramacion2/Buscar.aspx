@@ -8,9 +8,14 @@
             <label for="txtNumeroOrden" class="font-weight-bold">Número de Orden:</label>
             <asp:TextBox ID="txtNumeroOrden" runat="server" CssClass="form-control"></asp:TextBox>
         </div>
+
+        <br />
+
         <div>
             <asp:Button ID="btnBuscar" runat="server" Text="Buscar Orden" CssClass="btn btn-danger" OnClick="btnBuscar_Click" />
         </div>
+        <br />
+        <br />
 
         <asp:GridView ID="gvResultadoBusqueda" runat="server" CssClass="table table-bordered table-striped" AutoGenerateColumns="False" DataKeyNames="NumeroOrden">
             <Columns>

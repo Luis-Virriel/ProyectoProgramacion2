@@ -149,5 +149,34 @@ namespace ProyectoProgramacion2
             }
         }
 
+        
+
+        /*protected void gvOrdenes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            string numeroOrden = btn.CommandArgument.ToString(); // Obtiene el número de la orden
+            TextBox txtComentario = (TextBox)btn.NamingContainer.FindControl("txtNuevoComentario");
+            string textoComentario = txtComentario.Text;
+
+            // Crear nuevo comentario
+            Comentario nuevoComentario = new Comentario
+            {
+                Texto = textoComentario,
+                Fecha = DateTime.Now,
+                Autor = (Tecnico)Session["TecnicoActual"] // Aquí se asigna el técnico, por ejemplo: Session["Tecnico"] (o lo que corresponda)
+            };
+
+            // Buscar la orden por número de orden y agregar el comentario
+            var orden = BaseDeDatos.OrdenesDeTrabajo.FirstOrDefault(o => o.NumeroOrden == numeroOrden);
+            if (orden != null)
+            {
+                orden.Comentarios.Add(nuevoComentario); // Asumiendo que Comentarios es una lista
+            }
+
+            // Recargar el GridView para mostrar el comentario
+            gvOrdenes.DataSource = OrdenesDeTrabajo;
+            gvOrdenes.DataBind();
+        }*/
+        
     }
 }

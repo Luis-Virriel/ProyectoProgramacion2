@@ -26,6 +26,7 @@ namespace ProyectoProgramacion2.Models
 
         public static List<OrdenTrabajo> OrdenesDeTrabajo { get; set; } = new List<OrdenTrabajo>();
 
+
         public static int GenerarNumeroOrden()
         {
             return OrdenesDeTrabajo.Count + 1;

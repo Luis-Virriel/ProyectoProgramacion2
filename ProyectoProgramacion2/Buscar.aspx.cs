@@ -43,5 +43,7 @@ namespace ProyectoProgramacion2
                 lblError.Text = "Por favor, ingrese un número de orden válido.";
 
             }
+        }
+    }
 }
 
