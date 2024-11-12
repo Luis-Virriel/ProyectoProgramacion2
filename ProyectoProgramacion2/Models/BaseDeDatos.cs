@@ -23,7 +23,7 @@ namespace ProyectoProgramacion2.Models
             new Tecnico { Nombre = "Sofía", Apellido = "Morales", CI = "66554433", Especialidad = Especialidad.Electricidad },
             new Tecnico { Nombre = "Andrés", Apellido = "Martínez", CI = "55443322", Especialidad = Especialidad.Plomeria }
         };
-
+        
         public static List<OrdenTrabajo> OrdenesDeTrabajo { get; set; } = new List<OrdenTrabajo>();
 
 
@@ -31,6 +31,6 @@ namespace ProyectoProgramacion2.Models
         {
             return OrdenesDeTrabajo.Count + 1;
         }
-
+    
     }
 }

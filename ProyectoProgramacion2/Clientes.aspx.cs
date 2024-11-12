@@ -54,6 +54,12 @@ namespace ProyectoProgramacion2
                     lblError.Visible = true;
                     return;
                 }
+                if (!EsCedulaUruguaya(txtCI.Text))
+                {
+                    lblError.Text = "La cédula ingresada no es válida para Uruguay";
+                    lblError.Visible = true;
+                    return;
+                }
                 if (string.IsNullOrEmpty(txtEmail.Text))
                 {
                     lblError.Text = "Debe ingresar un correo electrónico válido";
@@ -181,7 +187,23 @@ namespace ProyectoProgramacion2
             gvClientes.DataSource = BaseDeDatos.Clientes;
             gvClientes.DataBind();
         }
+        private bool EsCedulaUruguaya(string ci)
+        {
 
+            ci = ci.Replace(".", "").Replace("-", "");
+            if (ci.Length < 7 || ci.Length > 8) return false;
+
+            int[] coeficientes = { 2, 9, 8, 7, 6, 3, 4 };
+            int suma = 0;
+            if (ci.Length == 7)
+                ci = "0" + ci;
+            for (int i = 0; i < 7; i++)
+            {
+                suma += (ci[i] - '0') * coeficientes[i];
+            }
+            int digitoVerificador = (10 - (suma % 10)) % 10;
+            return digitoVerificador == (ci[7] - '0');
+        }
 
     }
 

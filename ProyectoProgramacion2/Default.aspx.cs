@@ -20,7 +20,6 @@ namespace ProyectoProgramacion2
 
         private void CargarDatos()
         {
-            // Obtener las órdenes filtradas por estado y asignarlas a los GridView
             var ordenesPendientes = FiltrarPorEstado(Estado.Pendiente);
             gvOrdenesPendientes.DataSource = ordenesPendientes;
             gvOrdenesPendientes.DataBind();
@@ -33,7 +32,6 @@ namespace ProyectoProgramacion2
             gvOrdenesCompletadas.DataSource = ordenesCompletadas;
             gvOrdenesCompletadas.DataBind();
 
-            // Asignar las cantidades a los Labels
             lblPendingCount.Text = ordenesPendientes.Count.ToString();
             lblInProgressCount.Text = ordenesEnProgreso.Count.ToString();
             lblCompletedCount.Text = ordenesCompletadas.Count.ToString();
@@ -41,13 +39,12 @@ namespace ProyectoProgramacion2
 
         public List<OrdenTrabajo> FiltrarPorEstado(Estado estado)
         {
-            // Filtrar las órdenes según el estado
+
             return BaseDeDatos.OrdenesDeTrabajo.Where(o => o.Estado == estado).ToList();
         }
 
         protected void btnPendientes_Click(object sender, EventArgs e)
         {
-            // Mostrar u ocultar los GridView según el botón presionado
             gvOrdenesPendientes.Visible = true;
             gvOrdenesEnProgreso.Visible = false;
             gvOrdenesCompletadas.Visible = false;

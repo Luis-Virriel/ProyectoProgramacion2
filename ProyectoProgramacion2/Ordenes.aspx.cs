@@ -19,6 +19,10 @@ namespace ProyectoProgramacion2
                 CargarTecnicos();
                 CargarDatos();
             }
+            if (BaseDeDatos.OrdenesDeTrabajo.Count == 0)
+            {
+                AgregarOrdenesDeTrabajo();
+            }
         }
 
         private void CargarClientes()
@@ -75,7 +79,19 @@ namespace ProyectoProgramacion2
             txtDescripcion.Text = "";
             CargarDatos();
         }
+        private void AgregarOrdenesDeTrabajo()
+        {
+            
+            BaseDeDatos.OrdenesDeTrabajo.Add(new OrdenTrabajo(
+                BaseDeDatos.GenerarNumeroOrden(),
+                BaseDeDatos.Clientes.FirstOrDefault(c => c.CI == "12345678"), 
+                BaseDeDatos.Tecnicos.FirstOrDefault(t => t.CI == "99887766"), 
+                "Reparación de electrodoméstico - nevera",
+                Estado.Pendiente
+            ));
 
+           
+        }
 
         protected void gvOrdenes_RowEditing(object sender, GridViewEditEventArgs e)
         {
@@ -145,38 +161,12 @@ namespace ProyectoProgramacion2
                     {
                         ddlEstado.SelectedValue = orden.Estado.ToString();
                     }
+
                 }
             }
+
         }
 
-        
-
-        /*protected void gvOrdenes_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Button btn = (Button)sender;
-            string numeroOrden = btn.CommandArgument.ToString(); // Obtiene el número de la orden
-            TextBox txtComentario = (TextBox)btn.NamingContainer.FindControl("txtNuevoComentario");
-            string textoComentario = txtComentario.Text;
-
-            // Crear nuevo comentario
-            Comentario nuevoComentario = new Comentario
-            {
-                Texto = textoComentario,
-                Fecha = DateTime.Now,
-                Autor = (Tecnico)Session["TecnicoActual"] // Aquí se asigna el técnico, por ejemplo: Session["Tecnico"] (o lo que corresponda)
-            };
-
-            // Buscar la orden por número de orden y agregar el comentario
-            var orden = BaseDeDatos.OrdenesDeTrabajo.FirstOrDefault(o => o.NumeroOrden == numeroOrden);
-            if (orden != null)
-            {
-                orden.Comentarios.Add(nuevoComentario); // Asumiendo que Comentarios es una lista
-            }
-
-            // Recargar el GridView para mostrar el comentario
-            gvOrdenes.DataSource = OrdenesDeTrabajo;
-            gvOrdenes.DataBind();
-        }*/
         
     }
 }

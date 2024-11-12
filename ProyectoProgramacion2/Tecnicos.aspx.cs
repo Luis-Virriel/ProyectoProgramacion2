@@ -38,13 +38,11 @@ namespace ProyectoProgramacion2
 
         }
 
-       
+
 
         protected void cmdCrearTecnico_Click(object sender, EventArgs e)
         {
             lblError.Visible = false;
-
-
 
             if (string.IsNullOrEmpty(txtNombre.Text))
             {
@@ -64,41 +62,19 @@ namespace ProyectoProgramacion2
                 lblError.Visible = true;
                 return;
             }
-            
-
-            if (!int.TryParse(txtCI.Text, out _))
+            if (!int.TryParse(txtCI.Text.Replace(".", "").Replace("-", ""), out _))
             {
                 lblError.Text = "El número de documento debe ser un valor numérico";
                 lblError.Visible = true;
                 return;
             }
-
-
-
-            Tecnico tecnicoEncontrado = BaseDeDatos.Tecnicos.Find(c => c.CI == txtCI.Text);
-            if (tecnicoEncontrado != null)
+            if (!EsCedulaUruguaya(txtCI.Text))
             {
-                lblError.Text = "Ya existe un tecnico con la misma cédula.";
+                lblError.Text = "La cédula ingresada no es válida para Uruguay";
                 lblError.Visible = true;
                 return;
             }
-           
-            
 
-            Tecnico miTecnico = new Tecnico
-            {
-                Nombre = txtNombre.Text,
-                Apellido = txtApellido.Text,
-                CI = txtCI.Text,
-                Especialidad = convertirAespecialidad(txtEspecialidad.Text)
-            };
-            BaseDeDatos.Tecnicos.Add(miTecnico);
-            CargarTecnicos();
-
-            gvTecnicos.DataSource = BaseDeDatos.Tecnicos;
-            gvTecnicos.DataBind();
-            lblError.Visible = true;
-            LimpiarCampos();
         }
         private void LimpiarCampos()
         {
@@ -167,6 +143,23 @@ namespace ProyectoProgramacion2
                 BaseDeDatos.Tecnicos.RemoveAt(index);
                 CargarTecnicos();
             }
+        }
+        private bool EsCedulaUruguaya(string ci)
+        {
+
+            ci = ci.Replace(".", "").Replace("-", "");
+            if (ci.Length < 7 || ci.Length > 8) return false;
+
+            int[] coeficientes = { 2, 9, 8, 7, 6, 3, 4 };
+            int suma = 0;
+            if (ci.Length == 7)
+                ci = "0" + ci;
+            for (int i = 0; i < 7; i++)
+            {
+                suma += (ci[i] - '0') * coeficientes[i];
+            }
+            int digitoVerificador = (10 - (suma % 10)) % 10;
+            return digitoVerificador == (ci[7] - '0');
         }
 
 

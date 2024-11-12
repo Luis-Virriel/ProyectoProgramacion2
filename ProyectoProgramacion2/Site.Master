@@ -59,6 +59,7 @@
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Clientes">Clientes</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Ordenes">Ordenes</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Buscar">Buscar</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/ReporteDeActvidad">Reporte de actividad</a></li>
                     </ul>
                 </div>
             </div>
