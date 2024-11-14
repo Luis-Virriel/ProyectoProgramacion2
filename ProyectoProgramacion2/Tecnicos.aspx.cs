@@ -18,7 +18,6 @@ namespace ProyectoProgramacion2
         {
             if (!IsPostBack)
             {
-                Console.WriteLine("Cargando tecnicos...");
                 CargarTecnicos();
             }
 
@@ -44,6 +43,7 @@ namespace ProyectoProgramacion2
         {
             lblError.Visible = false;
 
+            // Validaciones
             if (string.IsNullOrEmpty(txtNombre.Text))
             {
                 lblError.Text = "Debe agregar un nombre";
@@ -75,7 +75,18 @@ namespace ProyectoProgramacion2
                 return;
             }
 
+            Tecnico nuevoTecnico = new Tecnico
+            {
+                Nombre = txtNombre.Text,
+                Apellido = txtApellido.Text,
+                CI = txtCI.Text,
+                Especialidad = convertirAespecialidad(txtEspecialidad.SelectedValue)
+            };
+            BaseDeDatos.Tecnicos.Add(nuevoTecnico);
+            LimpiarCampos();
+            CargarTecnicos(); 
         }
+
         private void LimpiarCampos()
         {
             txtNombre.Text = "";
@@ -122,10 +133,14 @@ namespace ProyectoProgramacion2
                 if (ddlEspecialidad != null && Enum.TryParse(ddlEspecialidad.SelectedValue, out Especialidad especialidad))
                 {
                     tecnico.Especialidad = especialidad;
+                    lblError.Text = "Técnico actualizado correctamente.";
+                    lblError.CssClass = "text-success"; // Cambiar estilo para éxito
+                    lblError.Visible = true;
                 }
                 else
                 {
                     lblError.Text = "Especialidad seleccionada no válida.";
+                    lblError.CssClass = "text-danger";
                     lblError.Visible = true;
                     return;
                 }

@@ -19,10 +19,7 @@ namespace ProyectoProgramacion2
                 CargarTecnicos();
                 CargarDatos();
             }
-            if (BaseDeDatos.OrdenesDeTrabajo.Count == 0)
-            {
-                AgregarOrdenesDeTrabajo();
-            }
+           
         }
 
         private void CargarClientes()
@@ -60,8 +57,6 @@ namespace ProyectoProgramacion2
                 return;
             }
 
-            int nuevoNumeroOrden = OrdenesTrabajo.Count > 0 ? OrdenesTrabajo.Max(o => o.NumeroOrden) + 1 : 1;
-
             if (ddlCliente.SelectedIndex == 0 || ddlTecnico.SelectedIndex == 0)
             {
                 lblError.Text = "Debe seleccionar un cliente y un técnico.";
@@ -69,51 +64,53 @@ namespace ProyectoProgramacion2
                 return;
             }
 
-            Cliente clienteSeleccionado = new Cliente { Nombre = ddlCliente.SelectedItem.Text };
-            Tecnico tecnicoSeleccionado = new Tecnico { Nombre = ddlTecnico.SelectedItem.Text };
+            int nuevoNumeroOrden = BaseDeDatos.GenerarNumeroOrden();
+            Cliente clienteSeleccionado = BaseDeDatos.Clientes.FirstOrDefault(c => c.CI == ddlCliente.SelectedValue);
+            Tecnico tecnicoSeleccionado = BaseDeDatos.Tecnicos.FirstOrDefault(t => t.CI == ddlTecnico.SelectedValue);
 
-            OrdenTrabajo nuevaOrden = new OrdenTrabajo(nuevoNumeroOrden, clienteSeleccionado, tecnicoSeleccionado, txtDescripcion.Text, Estado.Pendiente);
-            OrdenesTrabajo.Add(nuevaOrden);
+            if (clienteSeleccionado == null || tecnicoSeleccionado == null)
+            {
+                lblError.Text = "Error en la selección de cliente o técnico.";
+                lblError.Visible = true;
+                return;
+            }
+
+            OrdenTrabajo nuevaOrden = new OrdenTrabajo(
+                nuevoNumeroOrden,
+                clienteSeleccionado,
+                tecnicoSeleccionado,
+                txtDescripcion.Text,
+                Estado.Pendiente
+            );
+
+
             BaseDeDatos.OrdenesDeTrabajo.Add(nuevaOrden);
-            
             txtDescripcion.Text = "";
             CargarDatos();
         }
-        private void AgregarOrdenesDeTrabajo()
-        {
-            
-            BaseDeDatos.OrdenesDeTrabajo.Add(new OrdenTrabajo(
-                BaseDeDatos.GenerarNumeroOrden(),
-                BaseDeDatos.Clientes.FirstOrDefault(c => c.CI == "12345678"), 
-                BaseDeDatos.Tecnicos.FirstOrDefault(t => t.CI == "99887766"), 
-                "Reparación de electrodoméstico - nevera",
-                Estado.Pendiente
-            ));
 
-           
-        }
 
-        protected void gvOrdenes_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-            gvOrdenes.EditIndex = e.NewEditIndex;
-            CargarDatos();
-        }
 
         protected void gvOrdenes_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             lblError.Visible = false;
 
             int numeroOrden = (int)gvOrdenes.DataKeys[e.RowIndex].Value;
-
-            var orden = OrdenesTrabajo.FirstOrDefault(o => o.NumeroOrden == numeroOrden);
+            var orden = BaseDeDatos.OrdenesDeTrabajo.FirstOrDefault(o => o.NumeroOrden == numeroOrden);
             if (orden != null)
             {
                 var ddlEstado = (DropDownList)gvOrdenes.Rows[e.RowIndex].FindControl("ddlEstado");
                 if (ddlEstado != null)
                 {
+
                     if (Enum.TryParse<Estado>(ddlEstado.SelectedValue, out var nuevoEstado))
                     {
+
                         orden.Estado = nuevoEstado;
+                        if (nuevoEstado == Estado.Completada)
+                        {
+                            orden.FechaCompletada = DateTime.Now;
+                        }
                     }
                     else
                     {
@@ -122,51 +119,22 @@ namespace ProyectoProgramacion2
                         return;
                     }
                 }
-
-
                 gvOrdenes.EditIndex = -1;
                 CargarDatos();
             }
         }
+        protected void gvOrdenes_RowEditing(object sender, GridViewEditEventArgs e)
+        {
 
+            gvOrdenes.EditIndex = e.NewEditIndex;
+
+            CargarDatos();
+        }
 
         protected void gvOrdenes_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvOrdenes.EditIndex = -1;
             CargarDatos();
         }
-
-        protected void gvOrdenes_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                var ddlEstado = (DropDownList)e.Row.FindControl("ddlEstado");
-                if (ddlEstado != null)
-                {
-                    ddlEstado.DataSource = Enum.GetValues(typeof(Estado))
-                        .Cast<Estado>()
-                        .Select(estados => new
-                        {
-                            Value = estados.ToString(),
-                            Text = estados.ToString()
-                        })
-                        .ToList();
-
-                    ddlEstado.DataTextField = "Text";
-                    ddlEstado.DataValueField = "Value";
-                    ddlEstado.DataBind();
-
-                    var orden = e.Row.DataItem as OrdenTrabajo;
-                    if (orden != null)
-                    {
-                        ddlEstado.SelectedValue = orden.Estado.ToString();
-                    }
-
-                }
-            }
-
-        }
-
-        
     }
 }

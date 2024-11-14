@@ -63,11 +63,8 @@
                     <ItemTemplate>
                         <asp:Label ID="lblComentarios" runat="server"
                             Text='<%# string.Join(", ", (Eval("Comentarios") as List<ProyectoProgramacion2.Models.Comentario>).Select(c => c.Texto)) %>'></asp:Label>
-                        <!--<asp:Button ID="btnAgregarComentario" runat="server" Text="Agregar Comentario"
-                            CommandName="AgregarComentario" CommandArgument='<# Eval("NumeroOrden") >' />-->
-                        <!-- Button trigger modal -->
                         <asp:Button type="button" runat="server" class="btn btn" data-bs-toggle="modal" Text="Agregar" data-bs-target="#exampleModal"></asp:Button>
-
+                        
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -82,7 +79,6 @@
                                             <div class="col-sm-10">
                                                 <asp:DropDownList ID="ddlTecnico" runat="server" CssClass="form-control" Required="true"></asp:DropDownList>
                                                 <asp:RequiredFieldValidator runat="server" ID="rfvComentario" ValidationGroup="comentarioRequerido" ControlToValidate="ddlTecnico" CssClass="text-danger small"></asp:RequiredFieldValidator>
-
                                             </div>
                                         </div>
                                         <div class="mb-3 row">

@@ -23,14 +23,22 @@ namespace ProyectoProgramacion2.Models
             new Tecnico { Nombre = "Sofía", Apellido = "Morales", CI = "66554433", Especialidad = Especialidad.Electricidad },
             new Tecnico { Nombre = "Andrés", Apellido = "Martínez", CI = "55443322", Especialidad = Especialidad.Plomeria }
         };
-        
-        public static List<OrdenTrabajo> OrdenesDeTrabajo { get; set; } = new List<OrdenTrabajo>();
+        public static List<OrdenTrabajo> OrdenesDeTrabajo = new List<OrdenTrabajo>();
+
+
+
+
 
 
         public static int GenerarNumeroOrden()
         {
-            return OrdenesDeTrabajo.Count + 1;
+            if (OrdenesDeTrabajo.Count == 0)
+            {
+                return 1;
+            }
+            return OrdenesDeTrabajo.Max(o => o.NumeroOrden) + 1;
         }
-    
+
+
     }
 }

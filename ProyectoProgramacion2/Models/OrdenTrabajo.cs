@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using ProyectoProgramacion2.Models;
 
 namespace ProyectoProgramacion2.Models
 {
@@ -14,6 +15,7 @@ namespace ProyectoProgramacion2.Models
         public DateTime FechaCreacion { get; set; }
         public Estado Estado { get; set; }
         public List<Comentario> Comentarios { get; set; }
+        public DateTime? FechaCompletada { get; set; } 
 
         public OrdenTrabajo(int numeroOrden, Cliente clienteAsociado, Tecnico tecnicoAsignado, string descripcionProblema, Estado estado)
         {
@@ -24,8 +26,12 @@ namespace ProyectoProgramacion2.Models
             FechaCreacion = DateTime.Now;
             Estado = estado;
             Comentarios = new List<Comentario>();
+            FechaCompletada = null; 
+
         }
-        public static List<OrdenTrabajo> OrdenesDeTrabajo = new List<OrdenTrabajo>();
+
+
+       
         public int getNumeroOrden()
         {
             return NumeroOrden;
@@ -93,7 +99,18 @@ namespace ProyectoProgramacion2.Models
         {
             Comentarios.Add(comentario);
         }
-
-
+        public void MarcarComoCompletada()
+        {
+            Estado = Estado.Completada;
+            FechaCompletada = DateTime.Now; 
+        }
+        public static int GenerarNumeroOrden()
+        {
+            if (BaseDeDatos.OrdenesDeTrabajo.Count == 0)
+            {
+                return 1;
+            }
+            return BaseDeDatos.OrdenesDeTrabajo.Max(o => o.NumeroOrden) + 1;
+        }
     }
 }

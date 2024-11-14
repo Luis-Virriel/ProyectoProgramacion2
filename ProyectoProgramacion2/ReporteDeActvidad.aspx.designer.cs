@@ -7,21 +7,21 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace ProyectoProgramacion2.Scripts
+namespace ProyectoProgramacion2
 {
 
 
-    public partial class ReporteDeActvidad
+    public partial class ReporteDeActividad
     {
 
         /// <summary>
-        /// Control gvResumenTecnicos.
+        /// Control gvResumenTecnico.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvResumenTecnicos;
+        protected global::System.Web.UI.WebControls.GridView gvResumenTecnico;
 
         /// <summary>
         /// Control gvOrdenesCompletadas.
