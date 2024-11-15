@@ -11,7 +11,6 @@ namespace ProyectoProgramacion2
 {
     public partial class Clientes : System.Web.UI.Page
     {
-        //private object clientes;
 
         protected void Page_Load(object sender, EventArgs e)
         {

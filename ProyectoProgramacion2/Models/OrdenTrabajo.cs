@@ -104,13 +104,5 @@ namespace ProyectoProgramacion2.Models
             Estado = Estado.Completada;
             FechaCompletada = DateTime.Now; 
         }
-        public static int GenerarNumeroOrden()
-        {
-            if (BaseDeDatos.OrdenesDeTrabajo.Count == 0)
-            {
-                return 1;
-            }
-            return BaseDeDatos.OrdenesDeTrabajo.Max(o => o.NumeroOrden) + 1;
-        }
     }
 }

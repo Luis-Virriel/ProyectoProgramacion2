@@ -9,7 +9,7 @@ namespace ProyectoProgramacion2
 {
     public partial class Ordenes : Page
     {
-        private static List<OrdenTrabajo> OrdenesTrabajo = new List<OrdenTrabajo>();
+        private static List<OrdenTrabajo> OrdenesTrabajo => BaseDeDatos.OrdenesDeTrabajo;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -19,7 +19,6 @@ namespace ProyectoProgramacion2
                 CargarTecnicos();
                 CargarDatos();
             }
-           
         }
 
         private void CargarClientes()
@@ -40,16 +39,16 @@ namespace ProyectoProgramacion2
             ddlTecnico.Items.Insert(0, new ListItem("Seleccione un técnico", ""));
         }
 
-        private void CargarDatos()
+        public void CargarDatos()
         {
             gvOrdenes.DataSource = BaseDeDatos.OrdenesDeTrabajo;
             gvOrdenes.DataBind();
         }
 
+
         protected void btnCrearOrden_Click(object sender, EventArgs e)
         {
             lblError.Visible = false;
-
             if (string.IsNullOrEmpty(txtDescripcion.Text))
             {
                 lblError.Text = "La descripción es requerida.";
@@ -64,7 +63,6 @@ namespace ProyectoProgramacion2
                 return;
             }
 
-            int nuevoNumeroOrden = BaseDeDatos.GenerarNumeroOrden();
             Cliente clienteSeleccionado = BaseDeDatos.Clientes.FirstOrDefault(c => c.CI == ddlCliente.SelectedValue);
             Tecnico tecnicoSeleccionado = BaseDeDatos.Tecnicos.FirstOrDefault(t => t.CI == ddlTecnico.SelectedValue);
 
@@ -74,7 +72,7 @@ namespace ProyectoProgramacion2
                 lblError.Visible = true;
                 return;
             }
-
+            int nuevoNumeroOrden = BaseDeDatos.GenerarNumeroOrden();
             OrdenTrabajo nuevaOrden = new OrdenTrabajo(
                 nuevoNumeroOrden,
                 clienteSeleccionado,
@@ -82,12 +80,14 @@ namespace ProyectoProgramacion2
                 txtDescripcion.Text,
                 Estado.Pendiente
             );
-
-
             BaseDeDatos.OrdenesDeTrabajo.Add(nuevaOrden);
-            txtDescripcion.Text = "";
             CargarDatos();
+            ddlCliente.SelectedIndex = 0;
+            ddlTecnico.SelectedIndex = 0;
+            txtDescripcion.Text = "";
+            lblError.Visible = false;
         }
+
 
 
 

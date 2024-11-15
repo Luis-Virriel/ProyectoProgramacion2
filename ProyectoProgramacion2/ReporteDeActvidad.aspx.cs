@@ -1,7 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-using ProyectoProgramacion2.Models; // Asegúrate de ajustar el namespace según tu proyecto
+using System.Linq;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using ProyectoProgramacion2.Models;
 
 namespace ProyectoProgramacion2
 {

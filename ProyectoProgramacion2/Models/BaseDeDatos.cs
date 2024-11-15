@@ -34,9 +34,12 @@ namespace ProyectoProgramacion2.Models
         {
             if (OrdenesDeTrabajo.Count == 0)
             {
-                return 1;
+                return 1; 
             }
-            return OrdenesDeTrabajo.Max(o => o.NumeroOrden) + 1;
+            else
+            {
+                return OrdenesDeTrabajo.Max(o => o.NumeroOrden) + 1; 
+            }
         }
 
 
