@@ -4,77 +4,56 @@
 
 <html lang="es">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <configuration>
-    <system.web>
-        <pages enableEventValidation="true" />
-    </system.web>
-</configuration>
-    <title><%: Page.Title %> - Gestor de ordenes de trabajo.</title>
+    <title><%: Page.Title %> - Gestor de Órdenes de Trabajo</title>
 
-    <asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/bundles/modernizr") %>
-    </asp:PlaceHolder>
-
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
 </head>
-<body>
-    <form runat="server">
+<body class="d-flex flex-column min-vh-100 bg-dark text-light">
+    <form runat="server" class="flex-grow-1">
         <asp:ScriptManager runat="server">
             <Scripts>
-                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
                 <%--Framework Scripts--%>
                 <asp:ScriptReference Name="MsAjaxBundle" />
                 <asp:ScriptReference Name="jquery" />
-                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
-                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
-                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
-                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
-                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
-                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
-                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
-                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
                 <asp:ScriptReference Name="WebFormsBundle" />
-                <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <!-- Barra de navegación -->
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
             <div class="container">
-                <!--
-                <a class="navbar-brand" runat="server" href="~/">Gestor de Órdenes</a>-->
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar navegación" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-                 <span class="navbar-toggler-icon"></span>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar navegación">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                  
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Default">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Tecnicos">Tecnicos</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Tecnicos">Técnicos</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Clientes">Clientes</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Ordenes">Ordenes</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Ordenes">Órdenes</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Buscar">Buscar</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/ReporteDeActvidad">Reporte de actividad</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/ReporteDeActvidad">Reporte de Actividad</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <div class="container body-content">
+
+        <!-- Contenido principal centrado -->
+        <div class="container text-center mt-4">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
-            <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Danlee García y Luis Virriel</p>
-            </footer>
         </div>
     </form>
-    <asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/Scripts/bootstrap.js") %>
-    </asp:PlaceHolder>
+
+    <!-- Pie de página -->
+    <footer class="bg-dark text-light text-center py-3 mt-auto w-100">
+        <p>&copy; <%: DateTime.Now.Year %> - Danlee García y Luis Virriel</p>
+    </footer>
+
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
 </body>
 </html>
