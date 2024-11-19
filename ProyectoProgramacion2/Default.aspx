@@ -13,9 +13,9 @@
                     <asp:Label ID="lblPendingCount" runat="server" CssClass="fw-bold text-danger"></asp:Label>
                 </p>
                 <asp:Button runat="server" ID="btnPendientes" Text="Ver Detalles" CssClass="btn btn-outline-primary mb-3" OnClick="btnPendientes_Click" />
-                <div class="shadow-sm p-3 bg-body-tertiary rounded">
+                <div class="shadow-sm p-3  rounded">
                     <div class="table-responsive">
-                    <asp:GridView ID="gvOrdenesPendientes" Visible="false" runat="server" CssClass="table table-bordered table-striped" AutoGenerateColumns="False" DataKeyNames="NumeroOrden">
+                    <asp:GridView ID="gvOrdenesPendientes" Visible="false" runat="server" CssClass="table table-dark table-hover text-center" AutoGenerateColumns="False" DataKeyNames="NumeroOrden">
                         <Columns>
                             <asp:BoundField DataField="NumeroOrden" HeaderText="Número de Orden" />
                             <asp:BoundField DataField="ClienteAsociado.Nombre" HeaderText="Cliente" />
@@ -43,9 +43,9 @@
                     <asp:Label ID="lblInProgressCount" runat="server" CssClass="fw-bold text-warning"></asp:Label>
                 </p>
                 <asp:Button runat="server" ID="btnEnProgreso" Text="Ver Detalles" CssClass="btn btn-outline-primary mb-3" OnClick="btnEnProgreso_Click" />
-                <div class="shadow-sm p-3 bg-body-tertiary rounded">
+                <div class="shadow-sm p-3  rounded">
                     <div class="table-responsive">
-                    <asp:GridView ID="gvOrdenesEnProgreso" Visible="false" runat="server" CssClass="table table-bordered table-striped" AutoGenerateColumns="False" DataKeyNames="NumeroOrden">
+                    <asp:GridView ID="gvOrdenesEnProgreso" Visible="false" runat="server" CssClass="table table-dark table-hover text-center" AutoGenerateColumns="False" DataKeyNames="NumeroOrden">
                         <Columns>
                             <asp:BoundField DataField="NumeroOrden" HeaderText="Número de Orden" />
                             <asp:BoundField DataField="ClienteAsociado.Nombre" HeaderText="Cliente" />
@@ -73,9 +73,9 @@
                     <asp:Label ID="lblCompletedCount" runat="server" CssClass="fw-bold text-success"></asp:Label>
                 </p>
                 <asp:Button runat="server" ID="btnCompletadas" Text="Ver Detalles" CssClass="btn btn-outline-primary mb-3" OnClick="btnCompletadas_Click" />
-                <div class="shadow-sm p-3 bg-body-tertiary rounded">
+                <div class="shadow-sm p-3  rounded">
                     <div class="table-responsive">
-                    <asp:GridView ID="gvOrdenesCompletadas" Visible="false" runat="server" CssClass="table table-bordered table-striped" AutoGenerateColumns="False" DataKeyNames="NumeroOrden">
+                    <asp:GridView ID="gvOrdenesCompletadas" Visible="false" runat="server" CssClass="table table-dark table-hover text-center" AutoGenerateColumns="False" DataKeyNames="NumeroOrden">
                         <Columns>
                             <asp:BoundField DataField="NumeroOrden" HeaderText="Número de Orden" />
                             <asp:BoundField DataField="ClienteAsociado.Nombre" HeaderText="Cliente" />
