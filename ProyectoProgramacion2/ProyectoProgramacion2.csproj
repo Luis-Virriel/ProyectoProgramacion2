@@ -159,7 +159,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ReporteDeActvidad.aspx" />
-    <Content Include="WebForm1.aspx" />
+    <Content Include="PaginaTecnicos.aspx" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -279,12 +279,12 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="PaginaTecnicos.aspx.cs">
+      <DependentUpon>PaginaTecnicos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="PaginaTecnicos.aspx.designer.cs">
+      <DependentUpon>PaginaTecnicos.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
