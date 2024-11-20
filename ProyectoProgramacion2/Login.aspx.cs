@@ -25,6 +25,8 @@ namespace ProyectoProgramacion2
                     .Find(t => t.CI.Equals(username, StringComparison.OrdinalIgnoreCase));
                 if (tecnico != null && tecnico.CI == password)
                 {
+                    Session["VariableUsuario"] = "password";
+                    
                     Response.Redirect("PaginaTecnicos.aspx");
                 }
                 else
