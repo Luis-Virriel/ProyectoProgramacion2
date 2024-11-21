@@ -13,50 +13,61 @@ namespace ProyectoProgramacion2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (!IsPostBack)
             {
-                
-                
                 CargarDatos();
             }
         }
-        
-        
+
         public void CargarDatos()
         {
             string tecnicoCI = Session["VariableUsuario"]?.ToString();
-
-            /*Tecnico variable = BaseDeDatos.Tecnicos.FirstOrDefault(t => t.CI == tecnicoCI);
-            string textNombre = variable.getNombre();
-            lblNombre.Text = textNombre;*/
-
             var ordenesFiltradas = BaseDeDatos.OrdenesDeTrabajo
                 .Where(o => o.TecnicoAsignado.CI == tecnicoCI)
                 .ToList();
-
-            gvOrdenes.DataSource = BaseDeDatos.OrdenesDeTrabajo;
+            gvOrdenes.DataSource = ordenesFiltradas; // Asignar las órdenes filtradas
             gvOrdenes.DataBind();
+
+            
         }
 
-        
-
-
-
-
-       
-        protected void gvOrdenes_RowEditing(object sender, GridViewEditEventArgs e)
+        protected void gvOrdenes_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            int numeroOrden = Convert.ToInt32(e.CommandArgument);
 
-            gvOrdenes.EditIndex = e.NewEditIndex;
-
-            CargarDatos();
-        }
-
-        protected void gvOrdenes_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-        {
-            gvOrdenes.EditIndex = -1;
-            CargarDatos();
+            if (e.CommandName == "AbrirComentario")
+            {
+                // Abrir el modal para agregar comentario
+                Session["NumeroOrden"] = numeroOrden; // Guardar el número de orden en la sesión
+            }
+            else if (e.CommandName == "AceptarComentario")
+            {
+                // Guardar el comentario en la orden
+                string comentarioTexto = Request.Form["txtComentario.text"];
+                if (!string.IsNullOrWhiteSpace(comentarioTexto))
+                {
+                    var orden = BaseDeDatos.OrdenesDeTrabajo.FirstOrDefault(o => o.NumeroOrden == numeroOrden);
+                    if (orden != null)
+                    {
+                        Comentario nuevoComentario = new Comentario(comentarioTexto, DateTime.Now);
+                        orden.Comentarios.Add(nuevoComentario);
+                        ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Comentario agregado.');", true);
+                    }
+                }
+            }
+            else if (e.CommandName == "MostrarComentarios")
+            {
+                // Mostrar los comentarios
+                var orden = BaseDeDatos.OrdenesDeTrabajo.FirstOrDefault(o => o.NumeroOrden == numeroOrden);
+                if (orden != null && orden.Comentarios.Any())
+                {
+                    string comentarios = string.Join("\n", orden.Comentarios.Select(c => c.Texto));
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('Comentarios:\n{comentarios}');", true);
+                }
+            }
         }
     }
+
+
+    
 }

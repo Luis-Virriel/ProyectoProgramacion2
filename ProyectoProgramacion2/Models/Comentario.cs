@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.UI.WebControls;
 
 namespace ProyectoProgramacion2.Models
 {
@@ -9,12 +10,12 @@ namespace ProyectoProgramacion2.Models
     {
         public string Texto { get; set; }
         public DateTime Fecha { get; set; }
-        public Tecnico Autor { get; set; }
-        public Comentario(string texto, DateTime fecha, Tecnico autor)
+        //public Tecnico Autor { get; set; }
+        public Comentario(string texto, DateTime fecha)
         {
             Texto = texto;
             Fecha = fecha;
-            Autor = autor;
+            //Autor = autor;
         }
 
         public string getTexto()
@@ -37,15 +38,15 @@ namespace ProyectoProgramacion2.Models
             Fecha = fecha;
         }
 
-        public Tecnico getAutor()
-        {
-            return Autor;
-        }
+        //public Tecnico getAutor()
+        //{
+        //    return Autor;
+        //}
 
-        public void setAutor(Tecnico autor)
-        {
-            Autor = autor;
-        }
+        //public void setAutor(Tecnico autor)
+        //{
+        //    Autor = autor;
+        //}
 
 
 
