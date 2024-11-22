@@ -91,7 +91,7 @@ namespace ProyectoProgramacion2.Models
         {
             Estado = estado;
         }
-        public List<Comentario> getrComentarios()
+        public List<Comentario> getComentarios()
         {
             return new List<Comentario>(Comentarios);
         }

@@ -1,7 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PaginaTecnicos.aspx.cs" Inherits="ProyectoProgramacion2.WebForm2" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PaginaTecnicos.aspx.cs" Inherits="ProyectoProgramacion2.PaginaTecnicos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
     <style>
         body {
             margin-top: 0;
@@ -11,28 +10,55 @@
             display: none;
         }
 
-        .modal-content {
-            background-color: #f8f9fa;
-            padding: 20px;
+        .container {
+            padding-top: 30px;
         }
 
-        .modal-header {
+        .table thead {
             background-color: #007bff;
             color: white;
         }
 
-        .modal-footer {
-            text-align: right;
+        .btn-primary {
+            background-color: #28a745;
+            border-color: #28a745;
         }
+
+        .btn-primary:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
+        .comentarios-section {
+            margin-top: 20px;
+        }
+
+        .comentario-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+
+        .comentario-item p {
+            margin: 0;
+        }
+
+        .comentario-actions {
+            margin-top: 10px;
+        }
+
+        .comentario-actions button {
+            margin-right: 5px;
+        }
+
     </style>
 
+    <div class="container">
+        <h3 class="text-center mb-4">Lista de Órdenes de Trabajo</h3>
 
-    <div class="container mt-4">
-
-        <h3 class="text-light text-center mb-4">Lista de Órdenes de Trabajo
-            <asp:Label ID="lblNombre" runat="server"></asp:Label>
-        </h3>
-        <asp:GridView ID="gvOrdenes" runat="server" CssClass="table table-dark table-bordered table-striped text-center" AutoGenerateColumns="False" DataKeyNames="NumeroOrden">
+        <asp:GridView ID="gvOrdenes" runat="server" CssClass="table table-bordered table-striped text-center" AutoGenerateColumns="False" DataKeyNames="NumeroOrden" OnRowCommand="gvOrdenes_RowCommand">
             <Columns>
                 <asp:BoundField DataField="NumeroOrden" HeaderText="Número de Orden" />
                 <asp:BoundField DataField="ClienteAsociado.Nombre" HeaderText="Cliente" />
@@ -43,51 +69,47 @@
                         <%# Eval("Estado") %>
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-select bg-secondary text-light" SelectedValue='<%# Eval("Estado") %>'>
+                        <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-select bg-secondary text-light">
                             <asp:ListItem Text="Pendiente" Value="Pendiente"></asp:ListItem>
                             <asp:ListItem Text="EnProgreso" Value="EnProgreso"></asp:ListItem>
                             <asp:ListItem Text="Completada" Value="Completada"></asp:ListItem>
                         </asp:DropDownList>
                     </EditItemTemplate>
-
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Agregar Comentario">
+                <asp:TemplateField HeaderText="Acciones">
                     <ItemTemplate>
-                        <asp:Button ID="btnAbrirComentario" runat="server" Text="Agregar Comentario" CommandName="AbrirComentario"
-                            CommandArgument='<%# Eval("NumeroOrden") %>' CssClass="btn btn-primary" data-bs-toggle="modal" data-bs-target="#comentarioModal" />
-                    </ItemTemplate>
-                </asp:TemplateField>
-
-                <asp:TemplateField HeaderText="Mostrar Comentarios">
-                    <ItemTemplate>
-                        <asp:Button ID="btnMostrarComentarios" runat="server" Text="Mostrar Comentarios" CommandName="MostrarComentarios"
-                            CommandArgument='<%# Eval("NumeroOrden") %>' CssClass="btn btn-secondary" />
+                        <asp:Button ID="btnAbrirComentario" runat="server" Text="Agregar Comentario" CommandName="AbrirComentario" CommandArgument='<%# Eval("NumeroOrden") %>' CssClass="btn btn-primary" />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:CommandField ShowEditButton="True" />
             </Columns>
         </asp:GridView>
 
-        <div class="modal fade" id="comentarioModal" tabindex="-1" aria-labelledby="comentarioModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="comentarioModalLabel">Agregar Comentario</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div id="comentariosContainer">
+            <asp:Repeater ID="rptComentarios" runat="server">
+                <ItemTemplate>
+                    <div class="comentarios-section">
+                        <h5>Comentarios:</h5>
+                        <div class="comentario-item">
+                            <p><%# Eval("Texto") %></p>
+                            <div class="comentario-actions">
+                                <asp:Button ID="btnEditarComentario" runat="server" Text="Editar" CommandName="EditarComentario" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-warning btn-sm" />
+                                <asp:Button ID="btnEliminarComentario" runat="server" Text="Eliminar" CommandName="EliminarComentario" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-danger btn-sm" />
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <textarea id="txtComentario" runat="server" class="form-control" placeholder="Escribe tu comentario"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <asp:Button ID="btnAceptar" runat="server" Text="Aceptar" CommandName="AceptarComentario" CssClass="btn btn-success" />
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">Cancelar</button>
-                    </div>
-                </div>
-            </div>
+                </ItemTemplate>
+            </asp:Repeater>
         </div>
 
+        <div class="comentarios-section">
+            <h5>Agregar Comentario:</h5>
+            <asp:TextBox ID="txtComentario" runat="server" TextMode="MultiLine" Rows="4" CssClass="form-control" placeholder="Escribe tu comentario"></asp:TextBox>
+            <asp:Button ID="btnGuardarComentario" runat="server" Text="Guardar Comentario" CssClass="btn btn-primary mt-2" OnClick="btnGuardarComentario_Click" />
+        </div>
+
+        <br />
+        <asp:LinkButton ID="btnSalir" runat="server" CssClass="btn btn-danger" OnClick="btnSalir_Click">Cerrar Sesión</asp:LinkButton>
     </div>
-
-
 </asp:Content>

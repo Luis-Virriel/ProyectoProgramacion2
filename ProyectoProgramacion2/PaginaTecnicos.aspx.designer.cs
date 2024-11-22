@@ -11,17 +11,8 @@ namespace ProyectoProgramacion2
 {
 
 
-    public partial class WebForm2
+    public partial class PaginaTecnicos
     {
-
-        /// <summary>
-        /// Control lblNombre.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNombre;
 
         /// <summary>
         /// Control gvOrdenes.
@@ -33,21 +24,39 @@ namespace ProyectoProgramacion2
         protected global::System.Web.UI.WebControls.GridView gvOrdenes;
 
         /// <summary>
+        /// Control rptComentarios.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptComentarios;
+
+        /// <summary>
         /// Control txtComentario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTextArea txtComentario;
+        protected global::System.Web.UI.WebControls.TextBox txtComentario;
 
         /// <summary>
-        /// Control btnAceptar.
+        /// Control btnGuardarComentario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAceptar;
+        protected global::System.Web.UI.WebControls.Button btnGuardarComentario;
+
+        /// <summary>
+        /// Control btnSalir.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSalir;
     }
 }
