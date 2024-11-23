@@ -42,6 +42,19 @@ namespace ProyectoProgramacion2.Models
                 return OrdenesDeTrabajo.Max(o => o.NumeroOrden) + 1; 
             }
         }
+        public static void ActualizarOrden(OrdenTrabajo ordenActualizada)
+        {
+            var ordenExistente = OrdenesDeTrabajo.FirstOrDefault(o => o.NumeroOrden == ordenActualizada.NumeroOrden);
+            if (ordenExistente != null)
+            {
+                ordenExistente.ClienteAsociado = ordenActualizada.ClienteAsociado;
+                ordenExistente.TecnicoAsignado = ordenActualizada.TecnicoAsignado;
+                ordenExistente.DescripcionProblema = ordenActualizada.DescripcionProblema;
+                ordenExistente.Estado = ordenActualizada.Estado;
+                ordenExistente.Comentarios = ordenActualizada.Comentarios;
+                ordenExistente.FechaCompletada = ordenActualizada.FechaCompletada;
+            }
+        }
 
 
     }

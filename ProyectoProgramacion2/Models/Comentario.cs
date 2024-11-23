@@ -8,11 +8,13 @@ namespace ProyectoProgramacion2.Models
 {
     public class Comentario
     {
+        public int ComentarioID { get; set; }
         public string Texto { get; set; }
         public DateTime Fecha { get; set; }
 
-        public Comentario(string texto, DateTime fecha)
+        public Comentario(int comentarioID, string texto, DateTime fecha)
         {
+            ComentarioID = comentarioID;
             Texto = texto;
             Fecha = fecha;
         }

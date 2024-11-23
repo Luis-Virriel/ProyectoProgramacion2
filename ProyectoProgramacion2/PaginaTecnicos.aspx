@@ -1,115 +1,81 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PaginaTecnicos.aspx.cs" Inherits="ProyectoProgramacion2.PaginaTecnicos" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PaginaTecnicos.aspx.cs" Inherits="ProyectoProgramacion2.PaginaTecnicos" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Gestión de Técnicos</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
     <style>
+        /* Personalización para el fondo oscuro con bajo contraste */
         body {
-            margin-top: 0;
+            background-color: #212529; /* Fondo oscuro */
+            color: #6c757d; /* Texto de bajo contraste */
         }
-
-        .navbar, .footer {
-            display: none;
-        }
-
         .container {
-            padding-top: 30px;
+            background-color: #343a40; /* Fondo oscuro de los paneles */
+            padding: 20px;
+            border-radius: 10px;
         }
-
-        .table thead {
-            background-color: #007bff;
-            color: white;
+        .btn-danger {
+            background-color: #dc3545; /* Botón de color rojo */
+            border-color: #dc3545;
         }
-
-        .btn-primary {
-            background-color: #28a745;
-            border-color: #28a745;
+        .card {
+            background-color: #495057; /* Color de fondo más oscuro en el card */
+            color: #f8f9fa; /* Texto claro para el card */
         }
-
-        .btn-primary:hover {
-            background-color: #218838;
-            border-color: #1e7e34;
+        .text-muted {
+            color: #adb5bd !important; /* Color de texto ligeramente más claro */
         }
-
-        .comentarios-section {
-            margin-top: 20px;
+        .form-control {
+            background-color: #495057; 
+            color: #f8f9fa; 
+            border: 1px solid #6c757d; 
         }
-
-        .comentario-item {
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #f8f9fa;
-        }
-
-        .comentario-item p {
-            margin: 0;
-        }
-
-        .comentario-actions {
-            margin-top: 10px;
-        }
-
-        .comentario-actions button {
-            margin-right: 5px;
-        }
-
     </style>
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <form id="form1" runat="server" class="w-100">
 
-    <div class="container">
-        <h3 class="text-center mb-4">Lista de Órdenes de Trabajo</h3>
+            <asp:GridView ID="gvOrdenes" runat="server" AutoGenerateColumns="False"
+                OnRowCommand="gvOrdenes_RowCommand" DataKeyNames="NumeroOrden" EmptyDataText="No hay órdenes disponibles."
+                CssClass="table table-dark">
+                <Columns>
+                    <asp:BoundField DataField="NumeroOrden" HeaderText="Número de Orden" SortExpression="NumeroOrden" HeaderStyle-CssClass="text-center" />
+                    <asp:BoundField DataField="DescripcionProblema" HeaderText="Descripción" SortExpression="Descripcion" />
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:Button ID="btnAbrirComentario" runat="server" CommandName="AbrirComentario" Text="Abrir Comentarios"
+                                CommandArgument='<%# Eval("NumeroOrden") %>' CssClass="btn btn-info" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+            </asp:GridView>
 
-        <asp:GridView ID="gvOrdenes" runat="server" CssClass="table table-bordered table-striped text-center" AutoGenerateColumns="False" DataKeyNames="NumeroOrden" OnRowCommand="gvOrdenes_RowCommand">
-            <Columns>
-                <asp:BoundField DataField="NumeroOrden" HeaderText="Número de Orden" />
-                <asp:BoundField DataField="ClienteAsociado.Nombre" HeaderText="Cliente" />
-                <asp:BoundField DataField="DescripcionProblema" HeaderText="Descripción" />
-                <asp:BoundField DataField="FechaCreacion" HeaderText="Fecha de Creación" DataFormatString="{0:dd/MM/yyyy}" />
-                <asp:TemplateField HeaderText="Estado">
+            <asp:Panel ID="comentariosSection" runat="server" CssClass="card mt-4" Visible="false">
+                <asp:Repeater ID="rptComentarios" runat="server">
                     <ItemTemplate>
-                        <%# Eval("Estado") %>
+                        <p>
+                            <%# Eval("Texto") %> - <%# Eval("Fecha", "{0:dd/MM/yyyy HH:mm}") %>
+                            <asp:Button ID="btnEditar" runat="server" CommandName="Editar" CommandArgument='<%# Container.ItemIndex %>' Text="Editar" CssClass="btn btn-secondary btn-sm" />
+                            <asp:Button ID="btnEliminar" runat="server" CommandName="Eliminar" CommandArgument='<%# Container.ItemIndex %>' Text="Eliminar" CssClass="btn btn-danger btn-sm" />
+                        </p>
                     </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-select bg-secondary text-light">
-                            <asp:ListItem Text="Pendiente" Value="Pendiente"></asp:ListItem>
-                            <asp:ListItem Text="EnProgreso" Value="EnProgreso"></asp:ListItem>
-                            <asp:ListItem Text="Completada" Value="Completada"></asp:ListItem>
-                        </asp:DropDownList>
-                    </EditItemTemplate>
-                </asp:TemplateField>
+                </asp:Repeater>
 
-                <asp:TemplateField HeaderText="Acciones">
-                    <ItemTemplate>
-                        <asp:Button ID="btnAbrirComentario" runat="server" Text="Agregar Comentario" CommandName="AbrirComentario" CommandArgument='<%# Eval("NumeroOrden") %>' CssClass="btn btn-primary" />
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:CommandField ShowEditButton="True" />
-            </Columns>
-        </asp:GridView>
+                <asp:TextBox ID="txtComentario" runat="server" CssClass="form-control" Placeholder="Escribe un comentario"></asp:TextBox>
+                <asp:Button ID="btnGuardarComentario" runat="server" Text="Guardar Comentario" CssClass="btn btn-primary mt-2" OnClick="btnGuardarComentario_Click" />
+            </asp:Panel>
 
-        <div id="comentariosContainer">
-            <asp:Repeater ID="rptComentarios" runat="server">
-                <ItemTemplate>
-                    <div class="comentarios-section">
-                        <h5>Comentarios:</h5>
-                        <div class="comentario-item">
-                            <p><%# Eval("Texto") %></p>
-                            <div class="comentario-actions">
-                                <asp:Button ID="btnEditarComentario" runat="server" Text="Editar" CommandName="EditarComentario" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-warning btn-sm" />
-                                <asp:Button ID="btnEliminarComentario" runat="server" Text="Eliminar" CommandName="EliminarComentario" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-danger btn-sm" />
-                            </div>
-                        </div>
-                    </div>
-                </ItemTemplate>
-            </asp:Repeater>
-        </div>
-
-        <div class="comentarios-section">
-            <h5>Agregar Comentario:</h5>
-            <asp:TextBox ID="txtComentario" runat="server" TextMode="MultiLine" Rows="4" CssClass="form-control" placeholder="Escribe tu comentario"></asp:TextBox>
-            <asp:Button ID="btnGuardarComentario" runat="server" Text="Guardar Comentario" CssClass="btn btn-primary mt-2" OnClick="btnGuardarComentario_Click" />
-        </div>
-
-        <br />
-        <asp:LinkButton ID="btnSalir" runat="server" CssClass="btn btn-danger" OnClick="btnSalir_Click">Cerrar Sesión</asp:LinkButton>
+            <asp:Panel ID="PanelSalir" runat="server" class="mt-3">
+                <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-danger" OnClick="btnSalir_Click">Cerrar Sesión</asp:LinkButton>
+            </asp:Panel>
+        </form>
     </div>
-</asp:Content>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

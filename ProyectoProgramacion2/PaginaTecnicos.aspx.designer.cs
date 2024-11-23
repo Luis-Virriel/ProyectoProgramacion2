@@ -15,6 +15,15 @@ namespace ProyectoProgramacion2
     {
 
         /// <summary>
+        /// Control form1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+
+        /// <summary>
         /// Control gvOrdenes.
         /// </summary>
         /// <remarks>
@@ -22,6 +31,15 @@ namespace ProyectoProgramacion2
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvOrdenes;
+
+        /// <summary>
+        /// Control comentariosSection.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel comentariosSection;
 
         /// <summary>
         /// Control rptComentarios.
@@ -51,12 +69,21 @@ namespace ProyectoProgramacion2
         protected global::System.Web.UI.WebControls.Button btnGuardarComentario;
 
         /// <summary>
-        /// Control btnSalir.
+        /// Control PanelSalir.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSalir;
+        protected global::System.Web.UI.WebControls.Panel PanelSalir;
+
+        /// <summary>
+        /// Control LinkButton1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
     }
 }
