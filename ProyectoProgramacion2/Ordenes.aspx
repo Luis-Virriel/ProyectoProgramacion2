@@ -22,7 +22,7 @@
             <div class="form-group row">
                 <label for="txtDescripcion" class="col-sm-3 col-form-label text-light font-weight-bold">Descripción del Problema:</label>
                 <div class="col-sm-9">
-                    <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control bg-secondary text-light" TextMode="MultiLine" placeholder="Ingrese la descripción del problema"></asp:TextBox>
+                    <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control bg-secondary text-light" placeholder="Ingrese la descripción del problema"></asp:TextBox>
                     <asp:RequiredFieldValidator runat="server" ID="rfvDescripcion" ValidationGroup="formRequerido" ControlToValidate="txtDescripcion" CssClass="text-danger small" Text="La descripción es requerida."></asp:RequiredFieldValidator>
                 </div>
             </div>

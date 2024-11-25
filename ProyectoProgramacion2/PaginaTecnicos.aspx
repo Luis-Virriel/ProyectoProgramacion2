@@ -14,6 +14,8 @@
                 <h1 class="text-light">
                     Bienvenido, <asp:Literal ID="litNombreTecnico" runat="server" />
                 </h1>
+                <h1><asp:Label ID="lblNoOrdenes" Visible="False" CssClass="text-danger" Text="No tienes ordenes pendientes" runat="server" /></h1>
+                
             </div>
 
             <asp:GridView ID="gvOrdenes" runat="server" AutoGenerateColumns="False"
@@ -55,6 +57,7 @@
                 <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-danger" OnClick="btnSalir_Click">Cerrar Sesión</asp:LinkButton>
             </asp:Panel>
         </form>
+        
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

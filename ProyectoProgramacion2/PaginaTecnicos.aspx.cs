@@ -43,11 +43,7 @@ namespace ProyectoProgramacion2
             }
 
             var ordenes = BaseDeDatos.OrdenesDeTrabajo;
-            if (ordenes == null || !ordenes.Any())
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "info", "alert('No hay órdenes disponibles.');", true);
-                return;
-            }
+            
 
             var ordenesFiltradas = ordenes
                 .Where(o => o.TecnicoAsignado?.CI == tecnicoCI)
@@ -55,10 +51,11 @@ namespace ProyectoProgramacion2
 
             if (ordenesFiltradas.Count == 0)
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "info", "alert('No se encontraron órdenes para este técnico.');", true);
+                lblNoOrdenes.Visible = true;
             }
             else
             {
+                lblNoOrdenes.Visible = false;
                 gvOrdenes.DataSource = ordenesFiltradas;
                 gvOrdenes.DataBind();
             }

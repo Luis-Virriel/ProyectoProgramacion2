@@ -9,6 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 using System.Web.Services.Description;
+using System.Text.RegularExpressions;
 
 namespace ProyectoProgramacion2
 {
@@ -42,21 +43,49 @@ namespace ProyectoProgramacion2
         protected void cmdCrearTecnico_Click(object sender, EventArgs e)
         {
             lblError.Visible = false;
+            string nombre = txtNombre.Text.Trim();
+            string apellido = txtApellido.Text.Trim();
+            string cedula = txtCI.Text.Trim();
+
+            string verificoNombreYapellido = @"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$";
+            Regex regex = new Regex(verificoNombreYapellido);
+
             if (string.IsNullOrEmpty(txtNombre.Text))
             {
                 lblError.Text = "Debe agregar un nombre";
                 lblError.Visible = true;
                 return;
             }
+            
+            if (!regex.IsMatch(nombre))
+            {
+                lblError.Text = "Debe escribir un nombre valido.";
+                lblError.Visible = true;
+                return;
+            }
+            if (!regex.IsMatch(apellido))
+            {
+                lblError.Text = "Debe escribir un apellido valido.";
+                lblError.Visible = true;
+                return;
+            }
+
             if (string.IsNullOrEmpty(txtApellido.Text))
             {
                 lblError.Text = "Debe agregar un apellido";
                 lblError.Visible = true;
                 return;
             }
+
             if (string.IsNullOrEmpty(txtCI.Text))
             {
                 lblError.Text = "Debe agregar un número de documento";
+                lblError.Visible = true;
+                return;
+            }
+            if (cedula.Contains("-"))
+            {
+                lblError.Text = "La cédula no debe contener guiones.";
                 lblError.Visible = true;
                 return;
             }

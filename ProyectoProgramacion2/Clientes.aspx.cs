@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Services.Description;
 using System.Web.UI;
@@ -34,6 +35,12 @@ namespace ProyectoProgramacion2
             if (gvClientes.EditIndex == -1)
             {
                 lblError.Visible = false;
+                string nombre = txtNombre.Text.Trim();
+                string apellido = txtApellido.Text.Trim();
+                string cedula = txtCI.Text.Trim();
+
+                string verificoNombreYapellido = @"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$";
+                Regex regex = new Regex(verificoNombreYapellido);
 
                 if (string.IsNullOrEmpty(txtNombre.Text))
                 {
@@ -47,6 +54,18 @@ namespace ProyectoProgramacion2
                     lblError.Visible = true;
                     return;
                 }
+                if (!regex.IsMatch(nombre))
+                {
+                    lblError.Text = "Debe escribir un nombre valido.";
+                    lblError.Visible = true;
+                    return;
+                }
+                if (!regex.IsMatch(apellido))
+                {
+                    lblError.Text = "Debe escribir un apellido valido.";
+                    lblError.Visible = true;
+                    return;
+                }
                 if (string.IsNullOrEmpty(txtCI.Text))
                 {
                     lblError.Text = "Debe agregar un número de documento";
@@ -56,6 +75,12 @@ namespace ProyectoProgramacion2
                 if (!EsCedulaUruguaya(txtCI.Text))
                 {
                     lblError.Text = "La cédula ingresada no es válida para Uruguay";
+                    lblError.Visible = true;
+                    return;
+                }
+                if (cedula.Contains("-"))
+                {
+                    lblError.Text = "La cédula no debe contener guiones.";
                     lblError.Visible = true;
                     return;
                 }
@@ -189,6 +214,7 @@ namespace ProyectoProgramacion2
 
             ci = ci.Replace(".", "").Replace("-", "");
             if (ci.Length < 7 || ci.Length > 8) return false;
+            
 
             int[] coeficientes = { 2, 9, 8, 7, 6, 3, 4 };
             int suma = 0;
