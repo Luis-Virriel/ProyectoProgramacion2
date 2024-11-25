@@ -46,6 +46,7 @@
                 <asp:BoundField DataField="TecnicoAsignado.Nombre" HeaderText="Técnico Asignado" />
                 <asp:BoundField DataField="DescripcionProblema" HeaderText="Descripción" />
                 <asp:BoundField DataField="FechaCreacion" HeaderText="Fecha de Creación" DataFormatString="{0:dd/MM/yyyy}" />
+                <asp:BoundField DataField="Comentarios" HeaderText="Comentarios" />
                 <asp:TemplateField HeaderText="Estado">
                     <ItemTemplate>
                         <%# Eval("Estado") %>

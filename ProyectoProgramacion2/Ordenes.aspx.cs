@@ -136,5 +136,6 @@ namespace ProyectoProgramacion2
             gvOrdenes.EditIndex = -1;
             CargarDatos();
         }
+
     }
 }

@@ -15,7 +15,7 @@ namespace ProyectoProgramacion2.Models
         public DateTime FechaCreacion { get; set; }
         public Estado Estado { get; set; }
         public List<Comentario> Comentarios { get; set; }
-        public DateTime? FechaCompletada { get; set; } 
+        public DateTime? FechaCompletada { get; set; }
 
         public OrdenTrabajo(int numeroOrden, Cliente clienteAsociado, Tecnico tecnicoAsignado, string descripcionProblema, Estado estado)
         {
@@ -26,12 +26,9 @@ namespace ProyectoProgramacion2.Models
             FechaCreacion = DateTime.Now;
             Estado = estado;
             Comentarios = new List<Comentario>();
-            FechaCompletada = null; 
+            FechaCompletada = null;
 
         }
-
-
-       
         public int getNumeroOrden()
         {
             return NumeroOrden;
@@ -102,7 +99,7 @@ namespace ProyectoProgramacion2.Models
         public void MarcarComoCompletada()
         {
             Estado = Estado.Completada;
-            FechaCompletada = DateTime.Now; 
+            FechaCompletada = DateTime.Now;
         }
     }
 }

@@ -61,6 +61,35 @@ namespace ProyectoProgramacion2
                 AbrirComentarios(numeroOrden);
             }
         }
+        protected void rptComentarios_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            int numeroOrden = Convert.ToInt32(Session["NumeroOrden"]);
+            var orden = BaseDeDatos.OrdenesDeTrabajo.FirstOrDefault(o => o.NumeroOrden == numeroOrden);
+
+            if (orden != null)
+            {
+                int comentarioID = Convert.ToInt32(e.CommandArgument);
+
+                if (e.CommandName == "Eliminar")
+                {
+                    var comentario = orden.Comentarios.FirstOrDefault(c => c.ComentarioID == comentarioID);
+                    if (comentario != null)
+                    {
+                        orden.Comentarios.Remove(comentario);
+                        AbrirComentarios(numeroOrden); // Actualiza la interfaz
+                    }
+                }
+                else if (e.CommandName == "Editar")
+                {
+                    var comentario = orden.Comentarios.FirstOrDefault(c => c.ComentarioID == comentarioID);
+                    if (comentario != null)
+                    {
+                        txtComentario.Text = comentario.Texto;
+                        Session["ComentarioID"] = comentarioID; // Guarda el ID del comentario para la edición
+                    }
+                }
+            }
+        }
 
         private void AbrirComentarios(int numeroOrden)
         {
@@ -103,16 +132,25 @@ namespace ProyectoProgramacion2
 
             if (orden != null)
             {
-                // Generar un ID único para el comentario
-                int comentarioID = orden.Comentarios.Count > 0 ? orden.Comentarios.Max(c => c.ComentarioID) + 1 : 1;
+                int comentarioID = Session["ComentarioID"] != null ? Convert.ToInt32(Session["ComentarioID"]) : 0;
 
-                // Agregar el nuevo comentario
-                orden.Comentarios.Add(new Comentario(comentarioID, comentarioTexto, DateTime.Now));
+                if (comentarioID > 0) // Editar comentario existente
+                {
+                    var comentario = orden.Comentarios.FirstOrDefault(c => c.ComentarioID == comentarioID);
+                    if (comentario != null)
+                    {
+                        comentario.Texto = comentarioTexto;
+                    }
+                    Session["ComentarioID"] = null; // Limpia la sesión
+                }
+                else // Crear un nuevo comentario
+                {
+                    comentarioID = orden.Comentarios.Count > 0 ? orden.Comentarios.Max(c => c.ComentarioID) + 1 : 1;
+                    orden.Comentarios.Add(new Comentario(comentarioID, comentarioTexto, DateTime.Now));
+                }
 
-                // Limpiar el campo de texto y recargar los comentarios
                 txtComentario.Text = string.Empty;
                 AbrirComentarios(numeroOrden);
-
                 ClientScript.RegisterStartupScript(this.GetType(), "success", "alert('Comentario guardado correctamente.');", true);
             }
             else
@@ -120,5 +158,6 @@ namespace ProyectoProgramacion2
                 ClientScript.RegisterStartupScript(this.GetType(), "error", "alert('Orden no encontrada para guardar el comentario.');", true);
             }
         }
+
     }
 }
