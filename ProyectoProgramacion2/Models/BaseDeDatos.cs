@@ -9,37 +9,42 @@ namespace ProyectoProgramacion2.Models
     {
         public static List<Cliente> Clientes { get; set; } = new List<Cliente>
         {
-            new Cliente { Nombre = "Juan", Apellido = "Pérez", CI = "12345678", Direccion = "Calle Falsa 123", Telefono = "555-1234", Email = "juan.perez@easd.com" },
-            new Cliente { Nombre = "María", Apellido = "González", CI = "87654321", Direccion = "Avenida Siempre Viva 456", Telefono = "555-5678", Email = "maria.gonzalez@dasdasd.com" },
-            new Cliente { Nombre = "Carlos", Apellido = "Sánchez", CI = "11223344", Direccion = "Calle Real 789", Telefono = "555-9101", Email = "carlos.sanchez@sefesf3.com" },
-            new Cliente { Nombre = "Ana", Apellido = "Lopez", CI = "22334455", Direccion = "Boulevard de los Sueños 101", Telefono = "555-1213", Email = "ana.lopez@por.com" },
-            new Cliente { Nombre = "Pepe", Apellido = "Martinez", CI = "33445566", Direccion = "Plaza Mayor 202", Telefono = "555-1415", Email = "luis.martinez@ejimplo.com" }
+            new Cliente("Juan", "Pérez", "51742259", "Calle Falsa 123", "555-1234", "juan.perez@easd.com"),
+            new Cliente("María", "González", "33896775", "Avenida Siempre Viva 456", "555-5678", "maria.gonzalez@dasdasd.com"),
+            new Cliente("Carlos", "Sánchez", "30152485", "Calle Real 789", "555-9101", "carlos.sanchez@sefesf3.com"),
+            new Cliente("Ana", "Lopez", "28886967", "Boulevard  101", "555-1213", "ana.lopez@por.com"),
+            new Cliente("Pepe", "Martinez", "40579087", "Plaza 202", "555-1415", "luis.martinez@ejimplo.com")
         };
+
         public static List<Tecnico> Tecnicos { get; set; } = new List<Tecnico>
         {
-            new Tecnico { Nombre = "Pedro", Apellido = "Ramírez", CI = "99887766", Especialidad = Especialidad.ReparacionElectrodomesticos },
-            new Tecnico { Nombre = "Lucía", Apellido = "Cruz", CI = "88776655", Especialidad = Especialidad.Informatica },
-            new Tecnico { Nombre = "Luis", Apellido = "Virriel", CI = "44952182", Especialidad = Especialidad.Informatica },
-            new Tecnico { Nombre = "Jorge", Apellido = "Hernandez", CI = "77665544", Especialidad = Especialidad.Mecanica },
-            new Tecnico { Nombre = "Danlee", Apellido = "Garcia", CI = "65574298", Especialidad = Especialidad.Informatica },
-            new Tecnico { Nombre = "Andrés", Apellido = "Martínez", CI = "55443322", Especialidad = Especialidad.Plomeria }
+            new Tecnico("Pedro", "Ramírez", "57211058", Especialidad.ReparacionElectrodomesticos),
+            new Tecnico("Lucía", "Cruz", "32100531", Especialidad.Informatica),
+            new Tecnico("Luis", "Virriel", "44952182", Especialidad.Informatica),
+            new Tecnico("Jorge", "Hernandez", "4214160", Especialidad.Mecanica),
+            new Tecnico("Danlee", "Garcia", "65574298", Especialidad.Informatica),
+            new Tecnico("Andrés", "Martínez", "20839201", Especialidad.Plomeria)
         };
-        public static List<OrdenTrabajo> OrdenesDeTrabajo = new List<OrdenTrabajo>();
+        public static List<OrdenTrabajo> OrdenesDeTrabajo { get; set; } = new List<OrdenTrabajo>();
+        
+        public static void AgregarOrden(Cliente cliente, Tecnico tecnico, string descripcionProblema, Estado estado)
+        {
+            int numeroOrden = GenerarNumeroOrden();
+            OrdenTrabajo nuevaOrden = new OrdenTrabajo(numeroOrden, cliente, tecnico, descripcionProblema, estado);
 
 
-
-
-
+            OrdenesDeTrabajo.Add(nuevaOrden);
+        }
 
         public static int GenerarNumeroOrden()
         {
             if (OrdenesDeTrabajo.Count == 0)
             {
-                return 1; 
+                return 1;
             }
             else
             {
-                return OrdenesDeTrabajo.Max(o => o.NumeroOrden) + 1; 
+                return OrdenesDeTrabajo.Max(o => o.NumeroOrden) + 1;
             }
         }
         public static void ActualizarOrden(OrdenTrabajo ordenActualizada)

@@ -16,7 +16,7 @@ namespace ProyectoProgramacion2
         {
             if (!IsPostBack)
             {
-                Console.WriteLine("Cargando clientes...");
+
                 CargarClientes();
             }
         }
@@ -88,15 +88,13 @@ namespace ProyectoProgramacion2
                     return;
                 }
 
-                Cliente miCliente = new Cliente
-                {
-                    Nombre = txtNombre.Text,
-                    Apellido = txtApellido.Text,
-                    CI = txtCI.Text,
-                    Email = txtEmail.Text,
-                    Direccion = txtDireccion.Text,
-                    Telefono = txtTelefono.Text
-                };
+                Cliente miCliente = new Cliente();
+                miCliente.setNombre(txtNombre.Text);    
+                miCliente.setApellido(txtApellido.Text);  
+                miCliente.setCI(txtCI.Text);             
+                miCliente.setEmail(txtEmail.Text);       
+                miCliente.setDireccion(txtDireccion.Text); 
+                miCliente.setTelefono(txtTelefono.Text);   
                 BaseDeDatos.Clientes.Add(miCliente);
                 CargarClientes();
 
@@ -157,12 +155,12 @@ namespace ProyectoProgramacion2
                     return;
                 }
                 Cliente cliente = BaseDeDatos.Clientes[index];
-                cliente.Nombre = ((TextBox)gvClientes.Rows[index].Cells[1].Controls[0]).Text;
-                cliente.Apellido = ((TextBox)gvClientes.Rows[index].Cells[2].Controls[0]).Text;
-                cliente.CI = nuevoCI;
-                cliente.Direccion = ((TextBox)gvClientes.Rows[index].Cells[4].Controls[0]).Text;
-                cliente.Telefono = ((TextBox)gvClientes.Rows[index].Cells[5].Controls[0]).Text;
-                cliente.Email = ((TextBox)gvClientes.Rows[index].Cells[6].Controls[0]).Text;
+                cliente.setNombre(((TextBox)gvClientes.Rows[index].Cells[1].Controls[0]).Text);
+                cliente.setApellido(((TextBox)gvClientes.Rows[index].Cells[2].Controls[0]).Text);
+                cliente.setCI(nuevoCI);
+                cliente.setDireccion(((TextBox)gvClientes.Rows[index].Cells[4].Controls[0]).Text);
+                cliente.setTelefono(((TextBox)gvClientes.Rows[index].Cells[5].Controls[0]).Text);
+                cliente.setEmail(((TextBox)gvClientes.Rows[index].Cells[6].Controls[0]).Text);
 
                 gvClientes.EditIndex = -1;
                 CargarClientes();

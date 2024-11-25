@@ -108,14 +108,13 @@ namespace ProyectoProgramacion2
 
             if (orden != null)
             {
-                // Verificar si hay comentarios antes de enlazarlos al repeater
                 if (orden.Comentarios != null && orden.Comentarios.Any())
                 {
                     rptComentarios.DataSource = orden.Comentarios;
                 }
                 else
                 {
-                    rptComentarios.DataSource = new List<Comentario>(); // No hay comentarios
+                    rptComentarios.DataSource = new List<Comentario>();
                 }
 
                 rptComentarios.DataBind();
@@ -145,16 +144,16 @@ namespace ProyectoProgramacion2
             {
                 int comentarioID = Session["ComentarioID"] != null ? Convert.ToInt32(Session["ComentarioID"]) : 0;
 
-                if (comentarioID > 0) // Editar comentario existente
+                if (comentarioID > 0) 
                 {
                     var comentario = orden.Comentarios.FirstOrDefault(c => c.ComentarioID == comentarioID);
                     if (comentario != null)
                     {
                         comentario.Texto = comentarioTexto;
                     }
-                    Session["ComentarioID"] = null; // Limpia la sesión
+                    Session["ComentarioID"] = null; 
                 }
-                else // Crear un nuevo comentario
+                else 
                 {
                     comentarioID = orden.Comentarios.Count > 0 ? orden.Comentarios.Max(c => c.ComentarioID) + 1 : 1;
                     orden.Comentarios.Add(new Comentario(comentarioID, comentarioTexto, DateTime.Now));
@@ -162,7 +161,7 @@ namespace ProyectoProgramacion2
 
                 txtComentario.Text = string.Empty;
                 AbrirComentarios(numeroOrden);
-                CargarDatos(); // Asegúrate de que el GridView también se actualiza.
+                CargarDatos(); 
                 ClientScript.RegisterStartupScript(this.GetType(), "success", "alert('Comentario guardado correctamente.');", true);
             }
             else

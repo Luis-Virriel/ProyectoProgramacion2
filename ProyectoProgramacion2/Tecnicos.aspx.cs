@@ -42,8 +42,6 @@ namespace ProyectoProgramacion2
         protected void cmdCrearTecnico_Click(object sender, EventArgs e)
         {
             lblError.Visible = false;
-
-            // Validaciones
             if (string.IsNullOrEmpty(txtNombre.Text))
             {
                 lblError.Text = "Debe agregar un nombre";
@@ -75,13 +73,11 @@ namespace ProyectoProgramacion2
                 return;
             }
 
-            Tecnico nuevoTecnico = new Tecnico
-            {
-                Nombre = txtNombre.Text,
-                Apellido = txtApellido.Text,
-                CI = txtCI.Text,
-                Especialidad = convertirAespecialidad(txtEspecialidad.SelectedValue)
-            };
+            Tecnico nuevoTecnico = new Tecnico();
+            nuevoTecnico.setNombre(txtNombre.Text);
+            nuevoTecnico.setApellido(txtApellido.Text);
+            nuevoTecnico.setCI(txtCI.Text);
+            nuevoTecnico.setEspecialidad(convertirAespecialidad(txtEspecialidad.SelectedValue));         
             BaseDeDatos.Tecnicos.Add(nuevoTecnico);
             LimpiarCampos();
             CargarTecnicos(); 
@@ -125,16 +121,16 @@ namespace ProyectoProgramacion2
                 GridViewRow row = gvTecnicos.Rows[index];
                 Tecnico tecnico = BaseDeDatos.Tecnicos[index];
 
-                tecnico.Nombre = ((TextBox)row.Cells[1].Controls[0]).Text;
-                tecnico.Apellido = ((TextBox)row.Cells[2].Controls[0]).Text;
-                tecnico.CI = ((TextBox)row.Cells[0].Controls[0]).Text;
+                tecnico.setNombre(((TextBox)row.Cells[1].Controls[0]).Text);
+                tecnico.setApellido(((TextBox)row.Cells[2].Controls[0]).Text);
+                tecnico.setCI(((TextBox)row.Cells[0].Controls[0]).Text);
 
                 DropDownList ddlEspecialidad = (DropDownList)row.FindControl("ddlEspecialidad");
                 if (ddlEspecialidad != null && Enum.TryParse(ddlEspecialidad.SelectedValue, out Especialidad especialidad))
                 {
                     tecnico.Especialidad = especialidad;
                     lblError.Text = "Técnico actualizado correctamente.";
-                    lblError.CssClass = "text-success"; // Cambiar estilo para éxito
+                    lblError.CssClass = "text-success"; 
                     lblError.Visible = true;
                 }
                 else

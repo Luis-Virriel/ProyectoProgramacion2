@@ -13,9 +13,9 @@ namespace ProyectoProgramacion2.Models
         public string Direccion { get; set; }
         public string Telefono { get; set; }
         public string Email { get; set; }
-
+        public Cliente() { }
         
-         public Cliente(string nombre, string apellido, string ci, string direccion, string telefono, string email)
+        public Cliente(string nombre, string apellido, string ci, string direccion, string telefono, string email)
         {
             Nombre = nombre;
             Apellido = apellido;
@@ -65,7 +65,7 @@ namespace ProyectoProgramacion2.Models
             Direccion = direccion;
         }
 
-        public string GetTelefono()
+        public string getTelefono()
         {
             return Telefono;
         }

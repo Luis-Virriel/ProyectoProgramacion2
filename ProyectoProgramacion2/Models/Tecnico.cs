@@ -11,15 +11,15 @@ namespace ProyectoProgramacion2.Models
         public string Apellido { get; set; }
         public string CI { get; set; }
         public Especialidad Especialidad { get; set; }
-
-       /*public Tecnico(string nombre, string apellido, string ci, Especialidad especialidad)
+        public Tecnico() { }
+        public Tecnico(string nombre, string apellido, string ci, Especialidad especialidad)
         {
             Nombre = nombre;
             Apellido = apellido;
             CI = ci;
             Especialidad = especialidad;
         }
-       */
+
         public string getNombre()
         {
             return Nombre;

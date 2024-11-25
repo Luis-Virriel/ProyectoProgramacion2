@@ -20,7 +20,6 @@ namespace ProyectoProgramacion2
 
         private void CargarResumenTecnicos()
         {
-            // Obtener el resumen de órdenes por estado para cada técnico
             var resumenTecnico = BaseDeDatos.Tecnicos.Select(t => new
             {
                 NombreTecnico = $"{t.Nombre} {t.Apellido}",
@@ -35,7 +34,6 @@ namespace ProyectoProgramacion2
 
         private void CargarOrdenesCompletadas()
         {
-            // Obtener todas las órdenes de trabajo completadas
             var ordenesCompletadas = BaseDeDatos.OrdenesDeTrabajo
                 .Where(o => o.Estado == Estado.Completada)
                 .Select(o => new
