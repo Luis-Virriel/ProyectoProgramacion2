@@ -13,6 +13,7 @@ namespace ProyectoProgramacion2
             if (!IsPostBack)
             {
                 CargarDatos();
+                
             }
         }
 
@@ -29,6 +30,16 @@ namespace ProyectoProgramacion2
             {
                 Response.Redirect("Login.aspx");
                 return;
+            }
+
+            var tecnico = BaseDeDatos.Tecnicos.FirstOrDefault(t => t.CI == tecnicoCI);
+            if (tecnico != null)
+            {
+                litNombreTecnico.Text =  tecnico.Nombre;
+            }
+            else
+            {
+                litNombreTecnico.Text = "";
             }
 
             var ordenes = BaseDeDatos.OrdenesDeTrabajo;
@@ -76,7 +87,7 @@ namespace ProyectoProgramacion2
                     if (comentario != null)
                     {
                         orden.Comentarios.Remove(comentario);
-                        AbrirComentarios(numeroOrden); // Actualiza la interfaz
+                        AbrirComentarios(numeroOrden); 
                     }
                 }
                 else if (e.CommandName == "Editar")
@@ -85,7 +96,7 @@ namespace ProyectoProgramacion2
                     if (comentario != null)
                     {
                         txtComentario.Text = comentario.Texto;
-                        Session["ComentarioID"] = comentarioID; // Guarda el ID del comentario para la edición
+                        Session["ComentarioID"] = comentarioID; 
                     }
                 }
             }
@@ -151,6 +162,7 @@ namespace ProyectoProgramacion2
 
                 txtComentario.Text = string.Empty;
                 AbrirComentarios(numeroOrden);
+                CargarDatos(); // Asegúrate de que el GridView también se actualiza.
                 ClientScript.RegisterStartupScript(this.GetType(), "success", "alert('Comentario guardado correctamente.');", true);
             }
             else
@@ -158,6 +170,7 @@ namespace ProyectoProgramacion2
                 ClientScript.RegisterStartupScript(this.GetType(), "error", "alert('Orden no encontrada para guardar el comentario.');", true);
             }
         }
+
 
     }
 }

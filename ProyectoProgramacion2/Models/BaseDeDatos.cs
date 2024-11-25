@@ -21,7 +21,7 @@ namespace ProyectoProgramacion2.Models
             new Tecnico { Nombre = "Lucía", Apellido = "Cruz", CI = "88776655", Especialidad = Especialidad.Informatica },
             new Tecnico { Nombre = "Luis", Apellido = "Virriel", CI = "44952182", Especialidad = Especialidad.Informatica },
             new Tecnico { Nombre = "Jorge", Apellido = "Hernandez", CI = "77665544", Especialidad = Especialidad.Mecanica },
-            new Tecnico { Nombre = "Sofía", Apellido = "Morales", CI = "66554433", Especialidad = Especialidad.Electricidad },
+            new Tecnico { Nombre = "Danlee", Apellido = "Garcia", CI = "65574298", Especialidad = Especialidad.Informatica },
             new Tecnico { Nombre = "Andrés", Apellido = "Martínez", CI = "55443322", Especialidad = Especialidad.Plomeria }
         };
         public static List<OrdenTrabajo> OrdenesDeTrabajo = new List<OrdenTrabajo>();

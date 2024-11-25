@@ -37,7 +37,9 @@
 
         <br />
 
-        <h3 class="text-light text-center mb-4">Lista de Órdenes de Trabajo <asp:Label ID="lblNombre" runat="server"></asp:Label> </h3> 
+        <h3 class="text-light text-center mb-4">Lista de Órdenes de Trabajo
+            <asp:Label ID="lblNombre" runat="server"></asp:Label>
+        </h3>
         <asp:GridView ID="gvOrdenes" runat="server" CssClass="table table-dark table-bordered table-striped text-center" AutoGenerateColumns="False" DataKeyNames="NumeroOrden"
             OnRowEditing="gvOrdenes_RowEditing" OnRowUpdating="gvOrdenes_RowUpdating" OnRowCancelingEdit="gvOrdenes_RowCancelingEdit">
             <Columns>
@@ -46,7 +48,11 @@
                 <asp:BoundField DataField="TecnicoAsignado.Nombre" HeaderText="Técnico Asignado" />
                 <asp:BoundField DataField="DescripcionProblema" HeaderText="Descripción" />
                 <asp:BoundField DataField="FechaCreacion" HeaderText="Fecha de Creación" DataFormatString="{0:dd/MM/yyyy}" />
-                <asp:BoundField DataField="Comentarios" HeaderText="Comentarios" />
+                <asp:TemplateField HeaderText="Comentarios">
+                    <ItemTemplate>
+                        <%# string.Join("<br />", ((List<ProyectoProgramacion2.Models.Comentario>)Eval("Comentarios")).Select(c => c.Texto)) %>
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:TemplateField HeaderText="Estado">
                     <ItemTemplate>
                         <%# Eval("Estado") %>

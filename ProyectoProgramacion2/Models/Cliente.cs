@@ -14,7 +14,7 @@ namespace ProyectoProgramacion2.Models
         public string Telefono { get; set; }
         public string Email { get; set; }
 
-        /*
+        
          public Cliente(string nombre, string apellido, string ci, string direccion, string telefono, string email)
         {
             Nombre = nombre;
@@ -24,7 +24,7 @@ namespace ProyectoProgramacion2.Models
             Telefono = telefono;
             Email = email;
         }
-        */
+        
         public string getNombre()
         {
             return Nombre;
@@ -88,33 +88,6 @@ namespace ProyectoProgramacion2.Models
         {
             return $"{Nombre} {Apellido}";
         }
-
-        //public string agregar(string nombre, string apellido, string cedula, string direccion, string telefono, string email)
-        // {
-
-
-
-        // string mensaje;
-
-        // Cliente nuevoCliente = new Cliente(/*nombre, apellido, cedula, direccion, telefono, email*/);
-
-        // Cliente clienteEncontrado = BaseDeDatos.Clientes.Find(c => c.CI == cedula);
-
-        // if (clienteEncontrado == null)
-        // {
-        //     mensaje = "Su nuevo Cliente se ha agregado correctamente. ";
-        //     BaseDeDatos.Clientes.Add(nuevoCliente);
-
-        //   }
-        // else
-        //   {
-        //    mensaje = "Ya existe un tecnico con la misma Cedula. ";
-        // }
-
-        // return mensaje;
-
-        // }
-
 
 
     }
