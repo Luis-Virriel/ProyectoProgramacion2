@@ -159,12 +159,9 @@ namespace ProyectoProgramacion2
                 txtComentario.Text = string.Empty;
                 AbrirComentarios(numeroOrden);
                 CargarDatos(); 
-                ClientScript.RegisterStartupScript(this.GetType(), "success", "alert('Comentario guardado correctamente.');", true);
+                
             }
-            else
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "error", "alert('Orden no encontrada para guardar el comentario.');", true);
-            }
+            
         }
 
 
